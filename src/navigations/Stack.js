@@ -3,6 +3,7 @@ import {createStackNavigator} from "@react-navigation/stack";
 import Category from "../components/Category";
 import Home from "../components/Home"
 import MenuDetail from "../components/MenuDetail";
+import MenuList from "../components/MenuList";
 
 const Stack = createStackNavigator();
 const StackNavigation = () => {
@@ -26,6 +27,7 @@ const StackNavigation = () => {
                           // headerTitle:"이곳에 메뉴 이름 들어감"
                           }
                           }/>
+            <Stack.Screen name={'MenuList'} component={MenuList} options={{headerShown:true}}/>
         </Stack.Navigator>
     );
 };
