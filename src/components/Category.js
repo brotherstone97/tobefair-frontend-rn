@@ -79,7 +79,7 @@ const Category = ({navigation}) => {
                     <CategoryText>세트메뉴</CategoryText>
                 </CategoryButton>
                 <CategoryButton>
-                    <CategoryText>음료</CategoryText>
+                    <CategoryText onPress={()=>{navigation.navigate('MenuList')}}>음료</CategoryText>
                 </CategoryButton>
                 <CategoryButton>
                     <CategoryText>음식</CategoryText>
