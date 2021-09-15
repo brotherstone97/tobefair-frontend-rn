@@ -62,7 +62,9 @@ const Category = ({navigation}) => {
     return (
         <Container>
             <TopContainer>
-                <HomeButton onPress={()=>{navigation.popToTop()}}>
+                <HomeButton onPress={() => {
+                    navigation.popToTop()
+                }}>
                     <HomeText>
                         처음으로 돌아가기
                     </HomeText>
@@ -71,7 +73,6 @@ const Category = ({navigation}) => {
                     placeholder='검색어를 입력하세요.'/>
             </TopContainer>
             <BottomContainer>
-
                 <CategoryButton>
                     <CategoryText>추천메뉴</CategoryText>
                 </CategoryButton>
@@ -81,7 +82,9 @@ const Category = ({navigation}) => {
                 <CategoryButton>
                     <CategoryText>음료</CategoryText>
                 </CategoryButton>
-                <CategoryButton>
+                <CategoryButton onPress={() => {
+                    navigation.navigate('MenuDetail')
+                }}>
                     <CategoryText>음식</CategoryText>
                 </CategoryButton>
                 <GuideText>
