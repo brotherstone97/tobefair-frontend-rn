@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components/native";
-import { useFetch } from "../hooks/UseFetch";
+import {useFetch} from "../hooks/UseFetch";
 
 const Container = styled.View`
   background-color: #f0f0f0;
@@ -39,36 +39,36 @@ const MenuImage = styled.View`
 const MenuName = styled.Text`
   flex: 5;
   font-size: 30px;
-  font-weight:bold;
+  font-weight: bold;
   padding-left: 15;
   padding-top: 10;
 `;
 const MenuPrice = styled.Text`
-    font-size: 19px;
-    font-weight: normal;
+  font-size: 19px;
+  font-weight: normal;
 `;
 
 const URL = "http://54.180.38.125:8000/menus/";
-const MenuList = ({ navigation }) => {
-  const { data, error } = useFetch(URL);
-  return (
-    <Container>
-      <TopContainer>
-        <Search placeholder="검색어를 입력하세요." />
-      </TopContainer>
-      <BottomContainer>
-        {data?.map((menu) => {
-          return (
-            <MenuContainer onPress={() => {
-                navigation.navigate('MenuDetail')
-            }}>
-              <MenuName>{menu["name"]}{'\n\n'}<MenuPrice>{menu["price"]}원</MenuPrice></MenuName>
-              <MenuImage></MenuImage>
-            </MenuContainer>
-          );
-        })}
-      </BottomContainer>
-    </Container>
-  );
+const MenuList = ({navigation}) => {
+    const {data, error, inProgress} = useFetch(URL);
+    return (
+        <Container>
+            <TopContainer>
+                <Search placeholder="검색어를 입력하세요."/>
+            </TopContainer>
+            <BottomContainer>
+                {data?.map((menu) => {
+                    return (
+                        <MenuContainer onPress={() => {
+                            navigation.navigate('MenuDetail')
+                        }}>
+                            <MenuName>{menu["name"]}{'\n\n'}<MenuPrice>{menu["price"]}원</MenuPrice></MenuName>
+                            <MenuImage></MenuImage>
+                        </MenuContainer>
+                    );
+                })}
+            </BottomContainer>
+        </Container>
+    );
 };
 export default MenuList;

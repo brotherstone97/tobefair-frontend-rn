@@ -6,6 +6,7 @@ import MenuDetail from "../components/MenuDetail";
 import MenuList from "../components/MenuList";
 
 const Stack = createStackNavigator();
+
 const StackNavigation = () => {
     return(
         <Stack.Navigator initialRouteName="Home" screenOptions={{
