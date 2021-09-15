@@ -82,6 +82,7 @@ const Category = ({navigation}) => {
                 <CategoryButton>
                     <CategoryText>음료</CategoryText>
                 </CategoryButton>
+                {/*MenuDetail로 넘어가는 이 부분에서 각 메뉴별 정보 넘기자 */}
                 <CategoryButton onPress={() => {
                     navigation.navigate('MenuDetail')
                 }}>

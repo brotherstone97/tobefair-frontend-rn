@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import styled from 'styled-components/native';
-import {Text} from "react-native";
+import {Text, StatusBar} from "react-native";
 import Hr from "react-native-hr-component";
 import Counter from "./Counter";
 
@@ -42,6 +42,8 @@ const ButtonText = styled.Text`
 `;
 
 const MenuDetail = () => {
+    // 상단바 스타일 지정
+    // StatusBar.setBackgroundColor("#fff")
     return (
         <Container>
             <MenuImage source={'assets/splash.png'}/>

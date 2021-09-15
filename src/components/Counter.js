@@ -19,10 +19,12 @@ const Counter = () => {
     return (
         <CounterContainer>
             <CounterButton title='-1' onPress={() => setCount(count - 1)}>
+                {/*이미지 대체 고려*/}
                 <CounterText>-</CounterText>
             </CounterButton>
             <Text style={{fontSize:25}}>{count+'개'}</Text>
             <CounterButton title='+1' onPress={() => setCount(count + 1)}>
+                {/*이미지 대체 고려*/}
                 <CounterText>+</CounterText>
             </CounterButton>
         </CounterContainer>
