@@ -54,13 +54,14 @@ const MenuList = ({ navigation }) => {
   return (
     <Container>
       <TopContainer>
-        
         <Search placeholder="검색어를 입력하세요." />
       </TopContainer>
       <BottomContainer>
         {data?.map((menu) => {
           return (
-            <MenuContainer>
+            <MenuContainer onPress={() => {
+                navigation.navigate('MenuDetail')
+            }}>
               <MenuName>{menu["name"]}{'\n\n'}<MenuPrice>{menu["price"]}원</MenuPrice></MenuName>
               <MenuImage></MenuImage>
             </MenuContainer>
