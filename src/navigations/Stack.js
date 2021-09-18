@@ -4,6 +4,7 @@ import Category from "../components/Category";
 import Home from "../components/Home"
 import MenuDetail from "../components/MenuDetail";
 import MenuList from "../components/MenuList";
+import OrderList from "../components/OrderList";
 
 const Stack = createStackNavigator();
 
@@ -29,6 +30,7 @@ const StackNavigation = () => {
                           }
                           }/>
             <Stack.Screen name={'MenuList'} component={MenuList} options={{headerShown:true}}/>
+            <Stack.Screen name={'OrderList'} component={OrderList} options={{headerShown:false}}/>
         </Stack.Navigator>
     );
 };

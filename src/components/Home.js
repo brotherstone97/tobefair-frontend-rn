@@ -62,7 +62,9 @@ const Home = ({ navigation }) => {
           </ButtonText>
         </OrderButton>
       </OrderButtonContainer>
-      <ListButton>
+      <ListButton onPress={() => {
+            navigation.navigate("OrderList");
+          }}>
         <ButtonText>주문내역</ButtonText>
       </ListButton>
     </Container>
