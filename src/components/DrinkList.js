@@ -1,6 +1,6 @@
-import React from "react";
+import React, {useContext} from "react";
 import styled from "styled-components/native";
-import {useFetch} from "../hooks/UseFetch";
+import APIContext from "../contexts";
 
 const Container = styled.View`
   background-color: #f0f0f0;
@@ -40,30 +40,33 @@ const MenuName = styled.Text`
   flex: 5;
   font-size: 30px;
   font-weight: bold;
-  padding-left: 15;
-  padding-top: 10;
+  padding-left: 4%;
+  padding-top: 2%;
 `;
 const MenuPrice = styled.Text`
   font-size: 19px;
   font-weight: normal;
 `;
 
-const URL = "http://54.180.38.125:8000/menus/";
-const MenuList = ({navigation}) => {
-    const {data, error, inProgress} = useFetch(URL);
+const DrinkList = ({navigation}) => {
+    const data = useContext(APIContext);
     return (
         <Container>
             <TopContainer>
                 <Search placeholder="검색어를 입력하세요."/>
             </TopContainer>
             <BottomContainer>
-                {data?.map((menu) => {
+                {data?.menus.filter((menu) => {
+                    if (menu["menu_type"] !== "음료") return false;
+                    return true;
+                }).map((menu) => {
                     return (
                         <MenuContainer onPress={() => {
-                            navigation.navigate('MenuDetail')
+                            navigation.navigate("MenuDetail", menu);
                         }}>
-                            <MenuName>{menu["name"]}{'\n\n'}<MenuPrice>{menu["price"]}원</MenuPrice></MenuName>
-                            <MenuImage></MenuImage>
+                            {/*가격을 받아와서 1000단위로 ','표시하기 위한 정규표현식 활용*/}
+                            <MenuName>{menu["name"]}{'\n\n'}<MenuPrice>{`${menu["price"].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원`}</MenuPrice></MenuName>
+                            <MenuImage/>
                         </MenuContainer>
                     );
                 })}
@@ -71,4 +74,4 @@ const MenuList = ({navigation}) => {
         </Container>
     );
 };
-export default MenuList;
+export default DrinkList;
