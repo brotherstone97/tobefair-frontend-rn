@@ -8,6 +8,7 @@ import SetMenuList from "../components/SetMenuList";
 import MainMenuList from "../components/MainMenuList";
 import DrinkList from "../components/DrinkList";
 import OrderList from "../components/OrderList";
+import VoiceOrder from "../components/VoiceOrder";
 
 const Stack = createStackNavigator();
 
@@ -82,6 +83,11 @@ const StackNavigation = () => {
       <Stack.Screen
         name={"OrderList"}
         component={OrderList}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name={"VoiceOrder"}
+        component={VoiceOrder}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
