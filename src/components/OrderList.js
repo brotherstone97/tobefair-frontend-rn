@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components/native";
-import { useFetch } from "../hooks/UseFetch";
+import APIContext from "../contexts";
 
 const Container = styled.View`
   background-color: #f0f0f0;
@@ -51,9 +51,8 @@ const OrderDate = styled.Text`
   font-weight: bold;
 `;
 
-const URL = "http://54.180.38.125:8000/orders/"; //시간 받아오려면 orders, 메뉴 받아오려면 order_menus
 const OrderList = ({ navigation }) => {
-  const { data, error, inProgress } = useFetch(URL);
+  const data = useContext(APIContext);
   return (
     <Container>
       <TopContainer>
@@ -67,7 +66,7 @@ const OrderList = ({ navigation }) => {
         <OrderText>*주문내역*</OrderText>
       </TopContainer>
       <BottomContainer>
-        {data?.map((order) => {
+        {data?.orders.map((order) => {
           return (
             <OrderContainer>
               <OrderId>
