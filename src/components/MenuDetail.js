@@ -42,8 +42,11 @@ const ButtonText = styled.Text`
 `;
 
 const MenuDetail = ({ route }) => {
-  // 상단바 스타일 지정
-  // StatusBar.setBackgroundColor("#fff")
+const [count, setCount] = useState(1);
+
+const getData = count => {
+    setCount(count);
+}
   return (
     <Container>
       <MenuImage source={"assets/splash.png"} />
@@ -67,10 +70,10 @@ const MenuDetail = ({ route }) => {
         hrStyles={{ margin: 10 }}
         hrPadding={100}
       />
-      <Counter />
+      <Counter count={count} getData={getData} />
       <AddCartButton>
         {/*가격을 받아와서 1000단위로 ','표시하기 위한 정규표현식 활용*/}
-        <ButtonText>{`장바구니 추가 \t\t ${route.params.price
+        <ButtonText>{`장바구니 추가 \t\t ${((route.params.price)*count)
           .toString()
           .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원`}</ButtonText>
       </AddCartButton>

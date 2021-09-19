@@ -12,7 +12,7 @@ const TopContainer = styled.View`
   flex: 1;
 `;
 const HomeButton = styled.TouchableOpacity`
-  flex: 6;
+  flex: 1;
   background-color: #5d8c87;
 `;
 const HomeText = styled.Text`
@@ -23,7 +23,7 @@ const HomeText = styled.Text`
   font-size: 27px;
 `;
 const BottomContainer = styled.ScrollView`
-  flex: 6;
+  flex: 5;
 `;
 const OrderText = styled.Text`
   font-weight: bold;
@@ -74,6 +74,7 @@ const OrderList = ({ navigation }) => {
                 {"\n"}
               </OrderId>
               <OrderDate>주문시간: {order["order_date"]}</OrderDate>
+               <OrderDate>주문</OrderDate>2
             </OrderContainer>
           );
         })}
