@@ -16,7 +16,6 @@ const HomeText = styled.Text`
 `;
 const OrderButtonContainer = styled.View`
   margin-top: -20%;
-  padding-top: 25px;
   flex-direction: row;
 `;
 const OrderButton = styled.TouchableOpacity`
