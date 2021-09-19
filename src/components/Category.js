@@ -1,5 +1,6 @@
 import React from "react";
 import styled from 'styled-components/native';
+import {getData} from "../hooks/getData";
 
 const Container = styled.View`
   background-color: white;
@@ -58,7 +59,14 @@ const CategoryText = styled.Text`
   margin: 7%;
 `;
 
+// const URL = "http://54.180.38.125:8000/menus/";
 const Category = ({navigation}) => {
+//     const {data, error, inProgress} = getData(URL);
+//     data?.map(menu => {
+//         Object.assign(menuList,menu);
+//     });
+    //왜 3번이나 출력하지?
+
     return (
         <Container>
             <TopContainer>
@@ -73,21 +81,27 @@ const Category = ({navigation}) => {
                     placeholder='검색어를 입력하세요.'/>
             </TopContainer>
             <BottomContainer>
-                <CategoryButton>
+                <CategoryButton onPress={() => {
+                    navigation.navigate('RecommendedList')
+                }}>
                     <CategoryText>추천메뉴</CategoryText>
                 </CategoryButton>
-                <CategoryButton>
+                <CategoryButton onPress={() => {
+                    navigation.navigate('SetMenuList')
+                }}>
                     <CategoryText>세트메뉴</CategoryText>
                 </CategoryButton>
                 <CategoryButton onPress={() => {
-                    navigation.navigate('MenuList')
+                    navigation.navigate('MainMenuList')
+                }}>
+                    <CategoryText>음식</CategoryText>
+                </CategoryButton>
+                <CategoryButton onPress={() => {
+                    navigation.navigate('DrinkList')
                 }}>
                     <CategoryText>음료</CategoryText>
                 </CategoryButton>
                 {/*MenuDetail로 넘어가는 이 부분에서 각 메뉴별 정보 넘기자 */}
-                <CategoryButton>
-                    <CategoryText>음식</CategoryText>
-                </CategoryButton>
                 <GuideText>
                     원하는 메뉴를 선택하세요.
                 </GuideText>

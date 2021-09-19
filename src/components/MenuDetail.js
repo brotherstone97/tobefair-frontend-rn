@@ -41,19 +41,21 @@ const ButtonText = styled.Text`
   margin: 7%;
 `;
 
-const MenuDetail = () => {
+const MenuDetail = ({route}) => {
     // 상단바 스타일 지정
     // StatusBar.setBackgroundColor("#fff")
+    console.log(route);
     return (
         <Container>
             <MenuImage source={'assets/splash.png'}/>
-            <Title>메뉴 이름</Title>
+            <Title>{route.params.name}</Title>
             <Hr text="주의사항" lineColor="lightgray" width={1} textStyles={{color:"lightgray", fontSize:20}} hrStyles={{margin:10}} hrPadding={100}/>
-            <MenuInfo>매운 맛이 강해요</MenuInfo>
+            <MenuInfo>{route.params.menu_info?route.params.menu_info:"특별히 조심할 점은 없습니다 :)"}</MenuInfo>
             <Hr text="수량" lineColor="lightgray" width={1} textStyles={{color:"lightgray", fontSize:20}} hrStyles={{margin:10}} hrPadding={100}/>
             <Counter/>
             <AddCartButton>
-                <ButtonText>{`장바구니 추가 \t\t 12,000원`}</ButtonText>
+                {/*가격을 받아와서 1000단위로 ','표시하기 위한 정규표현식 활용*/}
+                <ButtonText>{`장바구니 추가 \t\t ${route.params.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원`}</ButtonText>
             </AddCartButton>
         </Container>
     );

@@ -1,9 +1,8 @@
-import React from "react";
+import React, {useContext} from "react";
 import styled from 'styled-components/native';
-// import Button from './components/Button'
-// import CategoryScreen from "./components/CategoryScreen";
 import {NavigationContainer} from "@react-navigation/native";
 import StackNavigation from "./navigations/Stack";
+import {APIProvider} from "./contexts";
 
 const Container = styled.View`
   flex: 1;
@@ -11,13 +10,11 @@ const Container = styled.View`
 
 const App = () => {
     return (
-        // <Container>
-        //     <Button/>
-        //     {/*<CategoryScreen/>*/}
-        // </Container>
-        <NavigationContainer>
-            <StackNavigation/>
-        </NavigationContainer>
+        <APIProvider>
+            <NavigationContainer>
+                <StackNavigation/>
+            </NavigationContainer>
+        </APIProvider>
     );
 }
 
