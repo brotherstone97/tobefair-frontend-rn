@@ -51,6 +51,7 @@ const VoiceButtonText = styled.Text`
 const VoiceOrder = ({ navigation }) => {
   const speak = () => {
     const thingToSay = "주문하실 메뉴의 이름을 말해주세요.";
+    Speech.stop();
     Speech.speak(thingToSay, { pitch: 0.9, rate: 0.8 });
   };
   return (
