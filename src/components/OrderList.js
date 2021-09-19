@@ -30,7 +30,7 @@ const OrderText = styled.Text`
   font-size: 19px;
   padding-top: 8%;
   padding-bottom: 2%;
-  text-align: center;
+  margin-left: 5%;
 `; //이거 스크롤해도 보이게 할지
 const OrderContainer = styled.TouchableOpacity`
   background-color: white;
