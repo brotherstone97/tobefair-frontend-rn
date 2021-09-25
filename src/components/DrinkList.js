@@ -61,7 +61,8 @@ const DrinkList = ({navigation}) => {
                     return true;
                 }).map((menu) => {
                     return (
-                        <MenuContainer onPress={() => {
+                        <MenuContainer key={menu['id']}
+                                       onPress={() => {
                             navigation.navigate("MenuDetail", menu);
                         }}>
                             {/*가격을 받아와서 1000단위로 ','표시하기 위한 정규표현식 활용*/}

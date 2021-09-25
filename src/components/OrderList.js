@@ -68,7 +68,7 @@ const OrderList = ({ navigation }) => {
       <BottomContainer>
         {data?.orders.map((order) => {
           return (
-            <OrderContainer>
+            <OrderContainer key={order['id']}>
               <OrderId>
                 주문번호: {order["id"]}
                 {"\n"}

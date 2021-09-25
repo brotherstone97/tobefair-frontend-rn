@@ -62,9 +62,10 @@ const MainMenuList = ({navigation}) => {
                     return true;
                 }).map((menu) => {
                     return (
-                        <MenuContainer onPress={() => {
-                            navigation.navigate("MenuDetail", menu);
-                        }}>
+                        <MenuContainer key={menu['id']}
+                                       onPress={() => {
+                                           navigation.navigate("MenuDetail", menu);
+                                       }}>
                             <MenuName>
                                 {menu["name"]}{'\n\n'}
                                 <MenuPrice>

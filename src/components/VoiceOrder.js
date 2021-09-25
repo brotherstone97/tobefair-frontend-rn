@@ -54,8 +54,8 @@ const VoiceButtonText = styled.Text`
 
 const VoiceOrder = ({navigation}) => {
     // STT상태변수
-    const [results, setResults] = useState([]);
-    const [isListening, setIsListening] = useState(false);
+    const [results, setResults] = useState([]); //인식한 텍스트
+    const [isListening, setIsListening] = useState(false); //녹음 중 여부
 
     // STT useEffect()
     useEffect(() => {
@@ -76,6 +76,7 @@ const VoiceOrder = ({navigation}) => {
 
     async function toggleListening() {
         try {
+            console.log(isListening);
             if (isListening) {
                 await Voice.stop();
                 setIsListening(false);
@@ -107,11 +108,12 @@ const VoiceOrder = ({navigation}) => {
                 </HomeButton>
             </TopContainer>
             <BottomContainer>
+                {console.log(results)}
                 {results.map((result, index) => {
                     return <Text key ={`result-${index}`}>{result}</Text>;
                 })}
                 <VoiceContainer>
-                    <OrderContainer></OrderContainer>
+                    <OrderContainer/>
                     {/*음성입력 버튼*/}
                     <VoiceButton onPress={toggleListening}>
                         <VoiceButtonText>
