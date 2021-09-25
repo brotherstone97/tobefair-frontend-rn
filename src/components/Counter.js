@@ -10,9 +10,9 @@ const CounterContainer = styled.View`
   margin: 0 15%;
 `;
 const CounterButton = styled.TouchableOpacity`
-    flex: 1;
-    margin: 0 10%;
-    align-items: center;
+  flex: 1;
+  margin: 0 10%;
+  align-items: center;
 `;
 const CounterText = styled.Text`
   font-size: 40px;

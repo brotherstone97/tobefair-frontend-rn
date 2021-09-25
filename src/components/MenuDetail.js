@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import styled from "styled-components/native";
-import { Text, StatusBar } from "react-native";
+import {Text, StatusBar} from "react-native";
 import Hr from "react-native-hr-component";
 import Counter from "./Counter";
 
@@ -26,7 +26,7 @@ const MenuInfo = styled.Text`
   color: #000;
 `;
 const AddCartButton = styled.TouchableOpacity`
-  ]width: 80%;
+  width: 80%;
   margin-top: auto;
   margin-bottom: 5%;
   padding: 2%;
@@ -41,44 +41,44 @@ const ButtonText = styled.Text`
   margin: 7%;
 `;
 
-const MenuDetail = ({ route }) => {
-const [count, setCount] = useState(1);
+const MenuDetail = ({route}) => {
+    const [count, setCount] = useState(1);
 
-const getData = count => {
-    setCount(count);
-}
-  return (
-    <Container>
-      <MenuImage source={"assets/splash.png"} />
-      <Title>{route.params.name}</Title>
-      <Hr
-        text="참고사항"
-        lineColor="lightgray"
-        width={1}
-        textStyles={{ color: "lightgray", fontSize: 20 }}
-        hrStyles={{ margin: 10 }}
-        hrPadding={100}
-      />
-      <MenuInfo>
-        {route.params.menu_info ? route.params.menu_info : "-없음-"}
-      </MenuInfo>
-      <Hr
-        text="수량"
-        lineColor="lightgray"
-        width={1}
-        textStyles={{ color: "lightgray", fontSize: 20 }}
-        hrStyles={{ margin: 10 }}
-        hrPadding={100}
-      />
-      <Counter count={count} getData={getData} />
-      <AddCartButton>
-        {/*가격을 받아와서 1000단위로 ','표시하기 위한 정규표현식 활용*/}
-        <ButtonText>{`장바구니 추가 \t\t ${((route.params.price)*count)
-          .toString()
-          .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원`}</ButtonText>
-      </AddCartButton>
-    </Container>
-  );
+    const getData = count => {
+        setCount(count);
+    }
+    return (
+        <Container>
+            <MenuImage source={"assets/splash.png"}/>
+            <Title>{route.params.name}</Title>
+            <Hr
+                text="참고사항"
+                lineColor="lightgray"
+                width={1}
+                textStyles={{color: "lightgray", fontSize: 20}}
+                hrStyles={{margin: 10}}
+                hrPadding={100}
+            />
+            <MenuInfo>
+                {route.params.menu_info ? route.params.menu_info : "-없음-"}
+            </MenuInfo>
+            <Hr
+                text="수량"
+                lineColor="lightgray"
+                width={1}
+                textStyles={{color: "lightgray", fontSize: 20}}
+                hrStyles={{margin: 10}}
+                hrPadding={100}
+            />
+            <Counter count={count} getData={getData}/>
+            <AddCartButton>
+                {/*가격을 받아와서 1000단위로 ','표시하기 위한 정규표현식 활용*/}
+                <ButtonText>{`장바구니 추가 \t\t ${((route.params.price) * count)
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원`}</ButtonText>
+            </AddCartButton>
+        </Container>
+    );
 };
 
 export default MenuDetail;
