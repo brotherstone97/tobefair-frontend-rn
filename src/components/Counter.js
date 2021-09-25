@@ -10,24 +10,24 @@ const CounterContainer = styled.View`
   margin: 0 15%;
 `;
 const CounterButton = styled.TouchableOpacity`
-    flex: 1;
-    margin: 0 10%;
-    align-items: center;
+  flex: 1;
+  margin: 0 10%;
+  align-items: center;
 `;
 const CounterText = styled.Text`
   font-size: 40px;
 `;
 
-const Counter = () => {
-    const [count, setCount] = useState(1);
+const Counter = ({count, getData}) => {
+    // const [count, setCount] = useState(1);
     return (
         <CounterContainer>
-            <CounterButton title='-1' onPress={() => {if (count > 1) setCount(count - 1)}}>
+            <CounterButton title='-1' onPress={() => {if (count > 1) getData(count - 1)}}>
                 {/*이미지 대체 고려*/}
                 <CounterText>-</CounterText>
             </CounterButton>
             <Text style={{fontSize:25}}>{count+'개'}</Text>
-            <CounterButton title='+1' onPress={() => setCount(count + 1)}>
+            <CounterButton title='+1' onPress={() => getData(count + 1)}>
                 {/*이미지 대체 고려*/}
                 <CounterText>+</CounterText>
             </CounterButton>
