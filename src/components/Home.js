@@ -54,7 +54,9 @@ const Home = ({ navigation }) => {
 주문`}
           </ButtonText>
         </OrderButton>
-        <OrderButton>
+        <OrderButton onPress={() => {
+            navigation.navigate("VoiceOrder");
+          }}>
           <ButtonText>
             {`음성
 주문`}
