@@ -1161,7 +1161,7 @@
   resolved "https://registry.yarnpkg.com/@emotion/unitless/-/unitless-0.7.5.tgz#77211291c1900a700b8a78cfafda3160d76949ed"
   integrity sha512-OWORNpfjMsSSUBVrRBVGECkhWcULOAJz9ZW8uK9qgxD+87M7jHRcvh/A96XXNhXTLmKcoYSQtBEX7lHMO7YRwg==
 
-"@expo/config-plugins@2.0.4":
+"@expo/config-plugins@2.0.4", "@expo/config-plugins@^2.0.0":
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/@expo/config-plugins/-/config-plugins-2.0.4.tgz#955fd70a2aeefbe99ec71cecb1d7ea7b626dc79e"
   integrity sha512-JGt/X2tFr7H8KBQrKfbGo9hmCubQraMxq5sj3bqDdKmDOLcE1a/EDCP9g0U4GHsa425J8VDIkQUHYz3h3ndEXQ==
@@ -1548,6 +1548,14 @@
   version "0.1.10"
   resolved "https://registry.yarnpkg.com/@react-native-community/masked-view/-/masked-view-0.1.10.tgz#5dda643e19e587793bc2034dd9bf7398ad43d401"
   integrity sha512-rk4sWFsmtOw8oyx8SD3KSvawwaK7gRBSEIy2TAwURyGt+3TizssXP1r8nx3zY+R7v2vYYHXZ+k2/GULAT/bcaQ==
+
+"@react-native-voice/voice@3.2.2":
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/@react-native-voice/voice/-/voice-3.2.2.tgz#b8c2a4e8754d6ef31cce129464d5c88e0c39aa06"
+  integrity sha512-84jESjRrGemjIAhFxPqh7ms0G7vzJiIG6FWkyoimuJlkbPKj+9yWuD1psNOM0YTblbvEuERykexu4Is0bWYmdw==
+  dependencies:
+    "@expo/config-plugins" "^2.0.0"
+    invariant "^2.2.4"
 
 "@react-navigation/core@^6.0.1":
   version "6.0.1"
@@ -2848,6 +2856,11 @@ expo-modules-core@~0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/expo-modules-core/-/expo-modules-core-0.2.0.tgz#68e5b6e53d0afbf8d131578831aed657589a2d42"
   integrity sha512-inpfZ5X/BaTtbj2wG9PA9AC0MN8VyId6KSRlVuEg7+ziurHBy/kKDFxpOddUokhwiln2uhoYPSStJjR/tKypdw==
+
+expo-speech@^9.2.1:
+  version "9.2.1"
+  resolved "https://registry.yarnpkg.com/expo-speech/-/expo-speech-9.2.1.tgz#cc13e6c8d0463d7899c220f2bab858939969da5d"
+  integrity sha512-H5BCSUpHgStK6GnbHGsErsnUWWhpy4ejxkwK+RP8ERBbsFaT5mUowEWLY+/OiRueTwj35qXzYgeqW/tBv90A3g==
 
 expo-status-bar@~1.0.4:
   version "1.0.4"
@@ -4922,6 +4935,11 @@ react-native-gesture@0.2.0:
     ramda "^0.19.1"
     rx "^4.0.6"
     transducers.js "^0.3.2"
+
+react-native-hr-component@2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/react-native-hr-component/-/react-native-hr-component-2.0.3.tgz#fcde35502eea4788a35357b7325a771e6fd39dff"
+  integrity sha512-cc+CLUm9o+YO09dk9a7Ix4zgA1QGc/xYs0CBsLPe254nkQMojmJQ9aC3muUtU8x0+usvTj35ICQLH6QulTiQgQ==
 
 react-native-reanimated@~2.2.0:
   version "2.2.1"

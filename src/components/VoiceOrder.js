@@ -1,7 +1,11 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import styled from "styled-components/native";
 import * as Speech from "expo-speech";
-import { getData } from "../hooks/getData";
+import Voice, {
+    SpeechResultsEvent,
+    SpeechErrorEvent,
+} from "@react-native-voice/voice";
+import {Text} from "react-native";
 
 const Container = styled.View`
   background-color: white;
@@ -48,33 +52,76 @@ const VoiceButtonText = styled.Text`
   font-weight: bold;
 `;
 
-const VoiceOrder = ({ navigation }) => {
-  const speak = () => {
-    const thingToSay = "주문하실 메뉴의 이름을 말해주세요.";
-    Speech.stop();
-    Speech.speak(thingToSay, { pitch: 0.9, rate: 0.8 });
-  };
-  return (
-    <Container>
-      <TopContainer>
-        <HomeButton
-          onPress={() => {
-            navigation.popToTop();
-          }}
-        >
-          <HomeText>처음으로 돌아가기</HomeText>
-        </HomeButton>
-      </TopContainer>
-      <BottomContainer>
-        <VoiceContainer>
-          <OrderContainer></OrderContainer>
-          <VoiceButton onPress={speak}>
-            <VoiceButtonText>음성 입력</VoiceButtonText>
-          </VoiceButton>
-        </VoiceContainer>
-      </BottomContainer>
-    </Container>
-  );
+const VoiceOrder = ({navigation}) => {
+    // STT상태변수
+    const [results, setResults] = useState([]);
+    const [isListening, setIsListening] = useState(false);
+
+    // STT useEffect()
+    useEffect(() => {
+        function onSpeechResults(e: SpeechResultsEvent) {
+            setResults(e.value ?? []);
+        }
+
+        function onSpeechError(e: SpeechErrorEvent) {
+            console.error(e);
+        }
+
+        Voice.onSpeechError = onSpeechError;
+        Voice.onSpeechResults = onSpeechResults;
+        return function cleanup() {
+            Voice.destroy().then(Voice.removeAllListeners);
+        };
+    }, []);
+
+    async function toggleListening() {
+        try {
+            if (isListening) {
+                await Voice.stop();
+                setIsListening(false);
+            } else {
+                setResults([]);
+                await Voice.start("ko-KR");
+                setIsListening(true);
+            }
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
+    // TTS기능
+    const speak = () => {
+        const thingToSay = "주문하실 메뉴의 이름을 말씀해주세요.";
+        Speech.stop();
+        Speech.speak(thingToSay, {pitch: 0.9, rate: 0.8});
+    };
+    return (
+        <Container>
+            <TopContainer>
+                <HomeButton
+                    onPress={() => {
+                        navigation.popToTop();
+                    }}
+                >
+                    <HomeText>처음으로 돌아가기</HomeText>
+                </HomeButton>
+            </TopContainer>
+            <BottomContainer>
+                {results.map((result, index) => {
+                    return <Text key ={`result-${index}`}>{result}</Text>;
+                })}
+                <VoiceContainer>
+                    <OrderContainer></OrderContainer>
+                    {/*음성입력 버튼*/}
+                    <VoiceButton onPress={toggleListening}>
+                        <VoiceButtonText>
+                            {isListening ? "음성 입력 중" : "음성 입력"}
+                        </VoiceButtonText>
+                    </VoiceButton>
+                </VoiceContainer>
+            </BottomContainer>
+        </Container>
+    );
 };
 
 export default VoiceOrder;
