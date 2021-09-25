@@ -74,7 +74,7 @@ const OrderList = ({ navigation }) => {
                 {"\n"}
               </OrderId>
               <OrderDate>주문시간: {order["order_date"]}</OrderDate>
-               <OrderDate>주문</OrderDate>2
+               <OrderDate>주문</OrderDate>
             </OrderContainer>
           );
         })}
