@@ -12,7 +12,6 @@ const Container = styled.View`
   align-items: center;
 `;
 const MenuImage = styled.Image`
-  border: 1px solid black;
   width: 80%;
   height: 40%;
 `;
@@ -49,7 +48,7 @@ const MenuDetail = ({route}) => {
     }
     return (
         <Container>
-            <MenuImage source={"assets/splash.png"}/>
+            <MenuImage source={{uri: route.params.image}}/>
             <Title>{route.params.name}</Title>
             <Hr
                 text="참고사항"

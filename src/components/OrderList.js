@@ -1,7 +1,7 @@
 import React, {useContext, useState} from "react";
 import styled from "styled-components/native";
 import APIContext from "../contexts";
-import {Text} from "react-native";
+import {View} from "react-native";
 
 const Container = styled.View`
   background-color: #f0f0f0;
@@ -98,7 +98,7 @@ const OrderList = ({navigation}) => {
                             return true;
                         });
                         return (
-                            <>
+                            <View key={filteredOrderMenu['id']}>
                                 {
                                     filteredMenus.map(filteredMenu => {
                                         if (prevFilteredOrderMenu === filteredOrderMenu['order']) {
@@ -118,7 +118,7 @@ const OrderList = ({navigation}) => {
                                         );
                                     })
                                 }
-                            </>);
+                            </View>);
                     })
                     //주문시간 처리
                     const orderDateObj = new Date(order["order_date"]);
