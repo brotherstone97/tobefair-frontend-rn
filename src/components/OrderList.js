@@ -109,7 +109,7 @@ const OrderList = ({navigation}) => {
                                             <>
                                                 {/* overlapCount < 1 일때 렌더*/}
                                                 {overlapCount === 0 && (
-                                                    <OrderMenu>
+                                                    <OrderMenu key={filteredMenu['id']}>
                                                         {`${filteredMenu['name']} ${filteredOrderMenu['count']}개 ${filteredMenu['price'].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원`}</OrderMenu>)}
                                                 {/* overlapCount > 1 일때 즉,주문한 메뉴가 여러개일 때 렌더*/}
                                                 {overlapCount !== 0 && (<OrderMenu

@@ -43,7 +43,6 @@ const ButtonText = styled.Text`
 
 const OrderDetail = ({route}) => {
     const data = useContext(APIContext);
-    console.log('route=============================================================', route)
     const filteredOrderMenus = data?.orderMenus.filter(orderMenus => {
         if (orderMenus['order'] !== route.params.orderNo) return false;
         return true;
@@ -68,7 +67,7 @@ const OrderDetail = ({route}) => {
             {finalOrderMenus.map((finalOrderMenu) => {
                 return (
                     //주문한 메뉴 출력
-                    <OrderMenu>{`${finalOrderMenu[0]['name']} ${filteredOrderMenus[0]['count']}개`}</OrderMenu>
+                    <OrderMenu key={finalOrderMenu[0]['id']}>{`${finalOrderMenu[0]['name']} ${filteredOrderMenus[0]['count']}개`}</OrderMenu>
                 )
             })}
             <Hr
@@ -77,7 +76,7 @@ const OrderDetail = ({route}) => {
                 width={1}
                 textStyles={{color: "lightgray", fontSize: 20}}
                 hrStyles={{margin: 10}}
-                hrPadding={100}
+                hrPadding={50}
             />
             <InfoText>{`주문시간 : ${route.params.orderDate}`}</InfoText>
             <InfoText>{`주문번호 : ${route.params.orderNo}`}</InfoText>
