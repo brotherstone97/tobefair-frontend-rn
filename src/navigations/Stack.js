@@ -1,22 +1,35 @@
 import React from "react";
 import {createStackNavigator} from "@react-navigation/stack";
-import Category from "../components/Category";
+
+//로그인
+import LoginScreen from "../login/LoginScreen";
+import RegisterScreen from "../login/RegisterScreen"
+
+//메인화면
 import Home from "../components/Home";
-import MenuDetail from "../components/MenuDetail";
+//카테고리
+import Category from "../components/Category";
+//메뉴 리스트
 import RecommendedList from "../components/RecommendedList";
 import SetMenuList from "../components/SetMenuList";
 import MainMenuList from "../components/MainMenuList";
 import DrinkList from "../components/DrinkList";
+//메뉴 상세
+import MenuDetail from "../components/MenuDetail";
+//음성 주문
+import VoiceOrder from "../components/VoiceOrder";
+//주문 내역
 import OrderList from "../components/OrderList";
 import OrderDetail from "../components/OrderDetail";
-import VoiceOrder from "../components/VoiceOrder";
+
 
 const Stack = createStackNavigator();
 
 const StackNavigation = () => {
     return (
         <Stack.Navigator
-            initialRouteName="Home"
+            // initialRouteName="Home"
+            initialRouteName="RegisterScreen"
             screenOptions={{
                 headerStyle: {
                     backgroundColor: "#008577",
@@ -31,6 +44,16 @@ const StackNavigation = () => {
                 headerTintColor: "#fff",
             }}
         >
+            <Stack.Screen
+                name={"RegisterScreen"}
+                component={RegisterScreen}
+                options={{headerShown: false}}
+            />
+            <Stack.Screen
+                name={"LoginScreen"}
+                component={LoginScreen}
+                options={{headerShown: false}}
+            />
             <Stack.Screen
                 name={"Home"}
                 component={Home}
