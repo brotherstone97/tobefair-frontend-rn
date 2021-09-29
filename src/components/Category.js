@@ -1,12 +1,8 @@
 import React from "react";
 import styled from 'styled-components/native';
-import {getData} from "../hooks/getData";
+import {ScrollView, StyleSheet} from "react-native";
 
-const Container = styled.View`
-  background-color: white;
-  padding-top: 10%;
-  flex: 1;
-`;
+
 const TopContainer = styled.View`
   background-color: white;
   flex: 1;
@@ -68,10 +64,10 @@ const Category = ({navigation}) => {
     //왜 3번이나 출력하지?
 
     return (
-        <Container>
+        <ScrollView contentContainerStyle={styles.scrollView}>
             <TopContainer>
                 <HomeButton onPress={() => {
-                    navigation.popToTop()
+                    navigation.navigate("Home")
                 }}>
                     <HomeText>
                         처음으로 돌아가기
@@ -106,8 +102,27 @@ const Category = ({navigation}) => {
                     원하는 메뉴를 선택하세요.
                 </GuideText>
             </BottomContainer>
-        </Container>
+        </ScrollView>
     );
 }
+
+const styles = StyleSheet.create({
+    // textInput: {
+    //     backgroundColor: '#eaeaea',
+    //     width: "80%",
+    //     borderBottomWidth: 1,
+    //     paddingLeft: '10%',
+    //     paddingTop: '5%',
+    //     paddingBottom: '5%',
+    //     color: '#000',
+    //     fontSize: 20,
+    // },
+    scrollView: {
+        flex: 1,
+        backgroundColor: '#eaeaea',
+        alignItems: 'center',
+        justifyContent: 'center'
+    }
+})
 
 export default Category;

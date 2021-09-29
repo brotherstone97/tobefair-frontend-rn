@@ -69,7 +69,7 @@ const OrderList = ({navigation}) => {
             <TopContainer>
                 <HomeButton
                     onPress={() => {
-                        navigation.popToTop();
+                        navigation.navigate("Home")
                     }}
                 >
                     <HomeText>처음으로 돌아가기</HomeText>
