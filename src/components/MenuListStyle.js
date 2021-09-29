@@ -1,6 +1,6 @@
 import styled from "styled-components/native";
 
-const Container = styled.View`
+const Container = styled.ScrollView`
   background-color: #f0f0f0;
   flex: 1;
 `;
@@ -14,7 +14,9 @@ const Search = styled.TextInput`
   border: 1px solid #5d8c87;
   border-radius: 30px;
   margin: 10px;
-  padding-left: 20px;
+  padding-top: 3%;
+  padding-bottom: 3%;
+  padding-left: 5%;
   font-size: 20px;
 `;
 const BottomContainer = styled.ScrollView`

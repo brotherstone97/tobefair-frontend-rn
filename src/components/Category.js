@@ -1,10 +1,9 @@
 import React from "react";
 import styled from 'styled-components/native';
-import {ScrollView, StyleSheet} from "react-native";
+import {ScrollView, StyleSheet, SafeAreaView, StatusBar, Platform} from "react-native";
 
 
 const TopContainer = styled.View`
-  background-color: white;
   flex: 1;
 `;
 const HomeButton = styled.TouchableOpacity`
@@ -117,12 +116,13 @@ const styles = StyleSheet.create({
     //     color: '#000',
     //     fontSize: 20,
     // },
+
     scrollView: {
         flex: 1,
-        backgroundColor: '#eaeaea',
-        alignItems: 'center',
+        backgroundColor: '#fff',
+        // alignItems: 'center',
         justifyContent: 'center'
     }
-})
+});
 
 export default Category;
