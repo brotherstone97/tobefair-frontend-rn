@@ -3,6 +3,7 @@ import {Text, StyleSheet, ScrollView} from "react-native";
 import {TextInput} from "react-native-paper"
 import DropDownPicker from "react-native-dropdown-picker";
 import styled from "styled-components/native";
+import {useSignUp} from "../hooks/useSignUp";
 
 const StyledButton = styled.TouchableOpacity`
   background-color: #008577;
@@ -44,6 +45,7 @@ const RegisterScreen = ({navigation}) => {
             console.log('checkPin:', checkPin)
         } else {
             //DB CREATE
+            // useSignUp('signup');
             console.log('phone:', phone)
             console.log('pin:', pin)
             console.log('checkPin:', pin)
@@ -56,7 +58,7 @@ const RegisterScreen = ({navigation}) => {
                 fontSize: 40,
                 fontWeight: 'bold',
                 marginBottom: '10%',
-            }}>회원등록
+            }}>회원가입
             </Text>
             <TextInput
                 label="휴대폰번호"
@@ -121,7 +123,7 @@ const RegisterScreen = ({navigation}) => {
                 labelStyle={{fontWeight: 'bold'}}
             />
             <StyledButton onPress={_onSubmit}>
-                <Text style={{color: 'white', fontWeight: 'bold', fontSize: 40}}>회원등록</Text>
+                <Text style={{color: 'white', fontWeight: 'bold', fontSize: 40}}>회원가입</Text>
             </StyledButton>
         </ScrollView>
     );

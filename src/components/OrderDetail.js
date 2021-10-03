@@ -47,13 +47,23 @@ const OrderDetail = ({route}) => {
         if (orderMenus['order'] !== route.params.orderNo) return false;
         return true;
     });
+    // 필터링한 OrderMenu의 개수를 변수에 저장하고 메뉴별 주문개수 출력(ln:73)할 때 활용할 예정
+    let countOrderMenus = filteredOrderMenus.length
     //최종 주문한 메뉴를 array finalOrderMenu에 할당
     let finalOrderMenus = filteredOrderMenus.map(filteredOrderMenu => {
-        return data?.menus.filter(menu => {
-            if (menu['id'] !== filteredOrderMenu['menu']) return false;
-            return true;
-        });
+        //각 요소의 menu에 해당하는 value를 targetMenuId로 정의
+        const {menu: targetMenuId} = filteredOrderMenu;
+        //menu.id와 orderMenu의 id 즉,targerMenuId와 같은 메뉴를 menuInfo객체에 저장
+        const menuInfo = data?.menus.find(menu => menu.id === targetMenuId);
+        // ...연산자: spread연산자 object를 펼쳐주는 기능 filteredOrderMenu와 menuInfo를 return하는 객체의 요소 하나에 들어가게함.
+        //...연산자를 안쓰면 원본을 직접 건드리게 되므로 위험.
+        return {
+            ...filteredOrderMenu,
+            menuInfo
+        }
     });
+
+    console.log(finalOrderMenus)
     return (
         <Container>
             <Hr
@@ -65,9 +75,15 @@ const OrderDetail = ({route}) => {
                 hrPadding={50}
             />
             {finalOrderMenus.map((finalOrderMenu) => {
+                //finalOrderMenu객체의 키 값 id, count, menuInfo에 해당하는 value를 다음 객체에 저장함
+                const {id, count, menuInfo} = finalOrderMenu;
+                const {name} = menuInfo;
                 return (
                     //주문한 메뉴 출력
-                    <OrderMenu key={finalOrderMenu[0]['id']}>{`${finalOrderMenu[0]['name']} ${filteredOrderMenus[0]['count']}개`}</OrderMenu>
+                    <OrderMenu
+                        key={id}>
+                        {`${name} ${count}개`}
+                    </OrderMenu>
                 )
             })}
             <Hr

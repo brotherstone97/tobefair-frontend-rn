@@ -61,8 +61,7 @@ const OrderList = ({navigation}) => {
     const data = useContext(APIContext);
     //too many re-renders...오류 때문에  state사용 x
     //여러 메뉴를 시켰을 경우 한개만 시켰을 때랑 화면출력 시 차이를 두기 위해 다음 변수를 추가하여 이용.
-    let prevFilteredOrderMenu = 0;
-    let overlapCount = 0;
+
 
     return (
         <Container>
@@ -78,6 +77,8 @@ const OrderList = ({navigation}) => {
             </TopContainer>
             <BottomContainer>
                 {data?.orders.map(order => {
+                    let prevFilteredOrderMenu = 0;
+                    let overlapCount = 0;
                     //각 order테이블의 id에 맞는 Payment,Branch,OrderMenu 필터링
                     let filteredPayment = data?.payments.filter(filteredPayment => {
                         if (order['payment'] !== filteredPayment['id']) return false;
