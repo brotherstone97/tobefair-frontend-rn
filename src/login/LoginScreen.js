@@ -1,7 +1,9 @@
-import React, {useState} from "react";
+import React, {useRef, useState} from "react";
 import {StyleSheet, Text, ScrollView} from 'react-native';
 import {TextInput} from "react-native-paper"
 import styled from "styled-components/native/dist/styled-components.native.esm";
+
+import {fetchPost} from "./postSignIn";
 
 const StyledButton = styled.TouchableOpacity`
   background-color: #008577;
@@ -12,13 +14,15 @@ const StyledButton = styled.TouchableOpacity`
 
 const LoginScreen = ({navigation}) => {
     const [phone, setPhone] = useState('');
-    const [pin, setPin] = useState('');
+    const [password, setPassword] = useState('');
+
+    const ref = useRef('');
 
     const _handlePhoneChange = _phone => {
         setPhone(_phone);
     };
-    const _handlePinChange = _pin => {
-        setPin(_pin);
+    const _handlePinChange = _password => {
+        setPassword(_password);
     };
 
     const _onSubmit = () => {
@@ -26,8 +30,11 @@ const LoginScreen = ({navigation}) => {
         // if (){
         //     alert('입력된 비밀번호가 일치하지 않습니다.')
         // }else {
-        //DB CREATE
-        navigation.navigate("Home");
+        if((fetchPost(phone, password)===true)){
+            navigation.navigate("Home");
+        }else {
+            alert("휴대폰번호 혹은 비밀번호가 일치하지 않습니다.");
+        }
     }
 
     return (
@@ -42,6 +49,9 @@ const LoginScreen = ({navigation}) => {
                 label="휴대폰번호"
                 placeholder={'휴대폰번호'}
                 onChangeText={_handlePhoneChange}
+                onSubmitEditing={()=>{
+                    ref.current.focus();
+                }}
                 keyboardType={'number-pad'}
                 returnKeyType={'next'}
                 returnKeyLabel={'다음'}
@@ -49,7 +59,9 @@ const LoginScreen = ({navigation}) => {
                 style={styles.textInput}
             />
             <TextInput
+                ref={ref}
                 label="비밀번호 4자리"
+                secureTextEntry={true}
                 placeholder={'비밀번호 4자리'}
                 onChangeText={_handlePinChange}
                 keyboardType={'number-pad'}
