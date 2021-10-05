@@ -17,7 +17,7 @@ const RegisterScreen = ({navigation}) => {
 
     const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
-    const [checkPin, setCheckPin] = useState('');
+    const [checkPassword, setCheckPassword] = useState('');
     const [age, setAge] = useState(true);
     const [sex, setSex] = useState(true);
     //dropdown state
@@ -33,30 +33,33 @@ const RegisterScreen = ({navigation}) => {
     const _handlePhoneChange = _phone => {
         setPhone(_phone);
     };
-    const _handlePinChange = _password => {
+    const _handlePasswordChange = _password => {
         setPassword(_password);
     };
-    const _handleCheckPinChange = _password => {
-        setCheckPin(_password);
+    const _handleCheckPasswordChange = _password => {
+        setCheckPassword(_password);
     };
     const _handleAgeChange = _age => {
         setAge(_age);
     };
 
     const _onSubmit = () => {
-        if(!phone) alert("휴대폰 번호를 입력해주세요.");
-        else if (password !== checkPin) {
+        if(!phone || !password || !password || !age || !sex) alert("모든 정보를 입력하세요.");
+        else if (password !== checkPassword) {
             alert('입력된 비밀번호가 일치하지 않습니다.')
             console.log('phone:', phone)
             console.log('password:', password)
-            console.log('checkPin:', checkPin)
+            console.log('checkPassword:', checkPassword)
         } else {
             //DB CREATE
-            fetchPost(phone, password, age, sex);
-            console.log('phone:', phone)
-            console.log('password:', password)
-            console.log('checkPin:', password)
-            navigation.navigate("LoginScreen");
+            if((fetchPost(phone, password, age, sex))===true){
+                // console.log('phone:', phone)
+                // console.log('password:', password)
+                // console.log('checkPassword:', password)
+                navigation.navigate("LoginScreen");
+            }else{
+                alert('회원가입에 실패하였습니다.')
+            }
         }
     }
     return (
@@ -86,7 +89,7 @@ const RegisterScreen = ({navigation}) => {
                 secureTextEntry={true}
                 // right={<TextInput.Icon name="eye"/>}
                 placeholder={'비밀번호 4자리'}
-                onChangeText={_handlePinChange}
+                onChangeText={_handlePasswordChange}
                 keyboardType={'number-pad'}
                 returnKeyType={'next'}
                 returnKeyLabel={'다음'}
@@ -103,7 +106,7 @@ const RegisterScreen = ({navigation}) => {
                 secureTextEntry={true}
                 // right={<TextInput.Icon name="eye"/>}
                 placeholder={'비밀번호 확인'}
-                onChangeText={_handleCheckPinChange}
+                onChangeText={_handleCheckPasswordChange}
                 keyboardType={'number-pad'}
                 returnKeyType={'next'}
                 returnKeyLabel={'다음'}

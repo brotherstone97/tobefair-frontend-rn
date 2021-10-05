@@ -1,14 +1,21 @@
 import React, {useRef, useState} from "react";
-import {StyleSheet, Text, ScrollView} from 'react-native';
+import {StyleSheet, Text, ScrollView, View} from 'react-native';
 import {TextInput} from "react-native-paper"
 import styled from "styled-components/native/dist/styled-components.native.esm";
 
 import {fetchPost} from "./postSignIn";
 
-const StyledButton = styled.TouchableOpacity`
+const SignInButton = styled.TouchableOpacity`
   background-color: #008577;
   border-radius: 15px;
-  padding: 8%;
+  padding: 6%;
+  margin-top: 15%;
+  margin-right: 2%;
+`;
+const SignUpButton = styled.TouchableOpacity`
+  background-color: #5d8c87;
+  border-radius: 15px;
+  padding: 6%;
   margin-top: 15%;
 `;
 
@@ -25,15 +32,16 @@ const LoginScreen = ({navigation}) => {
         setPassword(_password);
     };
 
-    const _onSubmit = () => {
+    const _onSubmit = async () => {
         //검증 완료 되면 home으로 아니면 오류 메시지 출력
         // if (){
         //     alert('입력된 비밀번호가 일치하지 않습니다.')
         // }else {
-        if((fetchPost(phone, password)===true)){
+        //비동기함수 호출 땐 await키워드 안써주면 promise가 리턴됨.
+        if ((await fetchPost(phone, password)) === true) {
             navigation.navigate("Home");
-        }else {
-            alert("휴대폰번호 혹은 비밀번호가 일치하지 않습니다.");
+        } else {
+            alert('휴대폰번호 혹은 비밀번호가 일치하지 않습니다.')
         }
     }
 
@@ -49,7 +57,7 @@ const LoginScreen = ({navigation}) => {
                 label="휴대폰번호"
                 placeholder={'휴대폰번호'}
                 onChangeText={_handlePhoneChange}
-                onSubmitEditing={()=>{
+                onSubmitEditing={() => {
                     ref.current.focus();
                 }}
                 keyboardType={'number-pad'}
@@ -75,10 +83,15 @@ const LoginScreen = ({navigation}) => {
                 fontSize: 17,
                 fontWeight: 'bold',
                 marginTop: '10%'
-            }}>최초 로그인 시 다음부터 자동으로 로그인됩니다.</Text>
-            <StyledButton onPress={_onSubmit}>
+            }}>최초 로그인 시 다음부터는 자동 로그인됩니다.</Text>
+            <View style={styles.button}>
+            <SignInButton onPress={_onSubmit}>
                 <Text style={{color: 'white', fontWeight: 'bold', fontSize: 40}}>로그인</Text>
-            </StyledButton>
+            </SignInButton>
+            <SignUpButton onPress={() => {navigation.navigate("RegisterScreen")}}>
+                <Text style={{color: 'white', fontWeight: 'bold', fontSize: 40}}>회원가입</Text>
+            </SignUpButton>
+            </View>
         </ScrollView>
     );
 }
@@ -98,6 +111,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#eaeaea',
         alignItems: 'center',
         justifyContent: 'center'
+    },
+    button:{
+        flexDirection: "row",
     }
 })
 export default LoginScreen;

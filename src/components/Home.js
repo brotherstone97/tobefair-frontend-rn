@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 
 const Container = styled.View`
   flex: 1;

@@ -13,11 +13,11 @@ export const useBranch = () => {
                 //get all
                 const res = await fetch("http://54.180.38.125:8000/branches/");
                 const result = await res.json();
-                console.log(result)
+                // console.log(result)
                 if (res.ok) {
                     setBranchData(result);
                     setBranchError(null);
-                    console.log("res:" + res.ok);
+                    // console.log("res:" + res.ok);
                 } else {
                     console.log("에러 발생")
                     throw result;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState} from "react";
 import {createStackNavigator} from "@react-navigation/stack";
 
 //로그인
@@ -21,108 +21,115 @@ import VoiceOrder from "../components/VoiceOrder";
 //주문 내역
 import OrderList from "../components/OrderList";
 import OrderDetail from "../components/OrderDetail";
+import Splash from "../splashScreen/Splash";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {fetchPost} from "../login/postSignIn";
 
 
 const Stack = createStackNavigator();
 
 const StackNavigation = () => {
     return (
-        <Stack.Navigator
-            // initialRouteName="Home"
-            initialRouteName="RegisterScreen"
-            screenOptions={{
-                headerStyle: {
-                    backgroundColor: "#008577",
-                },
-                headerTitleStyle: {
-                    color: "#fff",
-                    fontSize: 22,
-                },
-                headerTitleAlign: "center",
-                headerBackTitleVisible: true,
-                headerBackTitle: "뒤로가기",
-                headerTintColor: "#fff",
-            }}
-        >
-            <Stack.Screen
-                name={"RegisterScreen"}
-                component={RegisterScreen}
-                options={{headerShown: false}}
-            />
-            <Stack.Screen
-                name={"LoginScreen"}
-                component={LoginScreen}
-                options={{headerShown: false}}
-            />
-            <Stack.Screen
-                name={"Home"}
-                component={Home}
-                options={{headerShown: false}}
-            />
-            <Stack.Screen
-                name={"Category"}
-                component={Category}
-                options={{headerShown: false}}
-            />
-            <Stack.Screen
-                name={"MenuDetail"}
-                component={MenuDetail}
-                options={{
-                    headerTitle: "메뉴주문",
-                    headerShown: true,
-                }}
-            />
-            <Stack.Screen
-                name={"RecommendedList"}
-                component={RecommendedList}
-                options={{
-                    headerShown: true,
-                    headerTitle: "추천메뉴",
-                }}
-            />
-            <Stack.Screen
-                name={"SetMenuList"}
-                component={SetMenuList}
-                options={{
-                    headerShown: true,
-                    headerTitle: "세트메뉴",
-                }}
-            />
-            <Stack.Screen
-                name={"MainMenuList"}
-                component={MainMenuList}
-                options={{
-                    headerShown: true,
-                    headerTitle: "음식",
-                }}
-            />
-            <Stack.Screen
-                name={"DrinkList"}
-                component={DrinkList}
-                options={{
-                    headerShown: true,
-                    headerTitle: "음료",
-                }}
-            />
-            <Stack.Screen
-                name={"OrderList"}
-                component={OrderList}
-                options={{headerShown: false}}
-            />
-            <Stack.Screen
-                name={"OrderDetail"}
-                component={OrderDetail}
-                options={{
-                    headerTitle: "주문내역 상세",
-                    headerShown: true,
-                }}
-            />
-            <Stack.Screen
-                name={"VoiceOrder"}
-                component={VoiceOrder}
-                options={{headerShown: false}}
-            />
-        </Stack.Navigator>
+                <Stack.Navigator
+                    initialRouteName={"Splash"}
+                    screenOptions={{
+                        headerStyle: {
+                            backgroundColor: "#008577",
+                        },
+                        headerTitleStyle: {
+                            color: "#fff",
+                            fontSize: 22,
+                        },
+                        headerTitleAlign: "center",
+                        headerBackTitleVisible: true,
+                        headerBackTitle: "뒤로가기",
+                        headerTintColor: "#fff",
+                    }}
+                >
+                    <Stack.Screen
+                        name="Splash"
+                        component={Splash}
+                        options={{headerShown: false}}
+                    />
+                    <Stack.Screen
+                        name="RegisterScreen"
+                        component={RegisterScreen}
+                        options={{headerShown: false}}
+                    />
+                    <Stack.Screen
+                        name="LoginScreen"
+                        component={LoginScreen}
+                        options={{headerShown: false}}
+                    />
+                    <Stack.Screen
+                        name="Home"
+                        component={Home}
+                        options={{headerShown: false}}
+                    />
+                    <Stack.Screen
+                        name="Category"
+                        component={Category}
+                        options={{headerShown: false}}
+                    />
+                    <Stack.Screen
+                        name="MenuDetail"
+                        component={MenuDetail}
+                        options={{
+                            headerTitle: "메뉴주문",
+                            headerShown: true,
+                        }}
+                    />
+                    <Stack.Screen
+                        name="RecommendedList"
+                        component={RecommendedList}
+                        options={{
+                            headerShown: true,
+                            headerTitle: "추천메뉴",
+                        }}
+                    />
+                    <Stack.Screen
+                        name="SetMenuList"
+                        component={SetMenuList}
+                        options={{
+                            headerShown: true,
+                            headerTitle: "세트메뉴",
+                        }}
+                    />
+                    <Stack.Screen
+                        name="MainMenuList"
+                        component={MainMenuList}
+                        options={{
+                            headerShown: true,
+                            headerTitle: "음식",
+                        }}
+                    />
+                    <Stack.Screen
+                        name="DrinkList"
+                        component={DrinkList}
+                        options={{
+                            headerShown: true,
+                            headerTitle: "음료",
+                        }}
+                    />
+                    <Stack.Screen
+                        name="OrderList"
+                        component={OrderList}
+                        options={{headerShown: false}}
+                    />
+                    <Stack.Screen
+                        name="OrderDetail"
+                        component={OrderDetail}
+                        options={{
+                            headerTitle: "주문내역 상세",
+                            headerShown: true,
+                        }}
+                    />
+                    <Stack.Screen
+                        name="VoiceOrder"
+                        component={VoiceOrder}
+                        options={{headerShown: false}}
+                    />
+                </Stack.Navigator>
     );
 };
 

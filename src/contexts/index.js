@@ -20,19 +20,6 @@ const PaymentsURL = "http://54.180.38.125:8000/orders/payments/";
 //users
 const UsersURL = "http://54.180.38.125:8000/users/";
 
-//getData호출
-// const {branchData, branchError, branchInProgress} = getData(BranchesURL);
-// const {ingredientData, ingredientError, ingredientInProgress} = getData(IngredientsURL);
-// const {orderData, orderError, orderInProgress} = getData(OrdersURL);
-// const {orderMenuData, orderMenuError, orderMenuInProgress} = getData(OrderMenusURL);
-// const {paymentData, paymentError, paymentInProgress} = getData(PaymentsURL);
-// const {userData, userError, userInProgress} = getData(UsersURL);
-// console.log('------------------------------------------------------\n' + data['id']);
-// console.log('------------------------------------------------------\n' + branchData);
-// console.log('------------------------------------------------------\n' + ingredientData);
-//hook 특성상 상태가 바뀌면 re-render됨 따라서 여러번 출력된다.
-console.log('PRINT MENU LIST==================================\n');
-
 const APIContext = createContext({}/*{data, MenuError, MenuInProgress} = getData(MenusURL)*/);
 
 //APP컴포넌트를 APIProvider로 감쌌기 때문에 App.js호출 시점에 API호출해서 미리 담아놓음. 결과적으로 카테고리에선 로컬에 저장된 context를 갖다쓰기 때문에 훨씬 빠름
