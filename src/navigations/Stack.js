@@ -24,7 +24,8 @@ import OrderDetail from "../components/OrderDetail";
 import Splash from "../splashScreen/Splash";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {fetchPost} from "../login/postSignIn";
-
+//장바구니
+import Cart from "../components/Cart";
 
 const Stack = createStackNavigator();
 
@@ -128,6 +129,14 @@ const StackNavigation = () => {
                         name="VoiceOrder"
                         component={VoiceOrder}
                         options={{headerShown: false}}
+                    />
+                    <Stack.Screen
+                        name="Cart"
+                        component={Cart}
+                        options={{
+                            headerTitle: "장바구니",
+                            headerShown: true,
+                        }}
                     />
                 </Stack.Navigator>
     );

@@ -53,6 +53,17 @@ const CategoryText = styled.Text`
   font-weight: bold;
   margin: 7%;
 `;
+const CartButton =  styled.TouchableOpacity`
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 100px;
+  height: 100px;
+  background-color: #008577;
+  border-radius: 50px;
+`;
+
+
 
 // const URL = "http://54.180.38.125:8000/menus/";
 const Category = ({navigation}) => {
@@ -101,6 +112,11 @@ const Category = ({navigation}) => {
                     원하는 메뉴를 선택하세요.
                 </GuideText>
             </BottomContainer>
+            <CartButton
+                onPress={() => {
+                    navigation.navigate("Cart");
+                }}
+            />
         </ScrollView>
     );
 }

@@ -24,6 +24,8 @@ const APIContext = createContext({}/*{data, MenuError, MenuInProgress} = getData
 
 //APP컴포넌트를 APIProvider로 감쌌기 때문에 App.js호출 시점에 API호출해서 미리 담아놓음. 결과적으로 카테고리에선 로컬에 저장된 context를 갖다쓰기 때문에 훨씬 빠름
 const APIProvider = ({children}) => {
+    let cart = 11;
+
     const {menuData, MenuError, MenuInProgress} = useMenu();
     const {ingredientData, ingredientError, ingredientInProgress} = useIngredient();
     const {branchData, branchError, branchInProgress} = useBranch();

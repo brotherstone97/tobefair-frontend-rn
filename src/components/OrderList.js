@@ -61,8 +61,6 @@ const OrderList = ({navigation}) => {
     const data = useContext(APIContext);
     //too many re-renders...오류 때문에  state사용 x
     //여러 메뉴를 시켰을 경우 한개만 시켰을 때랑 화면출력 시 차이를 두기 위해 다음 변수를 추가하여 이용.
-
-
     return (
         <Container>
             <TopContainer>
