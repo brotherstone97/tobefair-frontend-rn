@@ -1,5 +1,6 @@
 import React from "react";
 import styled from 'styled-components/native';
+import CartButton from "../styles/CartButton";
 import {ScrollView, StyleSheet, SafeAreaView, StatusBar, Platform} from "react-native";
 
 
@@ -53,26 +54,11 @@ const CategoryText = styled.Text`
   font-weight: bold;
   margin: 7%;
 `;
-const CartButton =  styled.TouchableOpacity`
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-  width: 100px;
-  height: 100px;
-  background-color: #008577;
-  border-radius: 50px;
-`;
 
 
 
 // const URL = "http://54.180.38.125:8000/menus/";
 const Category = ({navigation}) => {
-//     const {data, error, inProgress} = getData(URL);
-//     data?.map(menu => {
-//         Object.assign(menuList,menu);
-//     });
-    //왜 3번이나 출력하지?
-
     return (
         <ScrollView contentContainerStyle={styles.scrollView}>
             <TopContainer>
