@@ -1,7 +1,10 @@
 import React, {useContext, useEffect, useState} from "react";
+import {Text} from "react-native";
 import styled from "styled-components/native";
 import Counter from "./Counter";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import {globals} from "react-native/packages/eslint-config-react-native-community";
+import OrderDetail from "./OrderDetail";
 
 const Container = styled.ScrollView`
   background-color: #f0f0f0;
@@ -43,9 +46,31 @@ const CounterContainer = styled.View`
   margin-right: -10%;
 `;
 
+const PriceContainer = styled.TouchableOpacity`
+  background-color: white;
+  border-radius: 5px;
+  height: 7%;
+  padding: 5%;
+  margin: 0 3%;
+  margin-bottom: 5%;
+`;
+
+const OrderButton = styled.TouchableOpacity`
+  background-color: #008577;
+  border-radius: 5px;
+  height: 7%;
+  margin: 0% 3%;
+  margin-bottom: 15%;
+  align-items: center;
+  justify-content: center;
+`;
+
 const Cart = () => {
     const [count, setCount] = useState(1);
     const [cartList, setCartList] = useState([]);
+    let totalPrice = 0;
+
+    // const [totalPrice, setTotalPrice] = useState(0);
     const getData = (count) => {
         setCount(count);
     };
@@ -68,13 +93,14 @@ const Cart = () => {
         <Container>
             {
                 cartList.map(menu => {
+                    totalPrice += menu.price
                     return (
                         <CartContainer key={menu.id}>
                             <TextContainer>
                                 <CartMenu>{`${menu.name} ${menu.count}개`}</CartMenu>
                                 <CartPrice>{menu.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</CartPrice>
                             </TextContainer>
-                            <CartImage source={{uri:menu['image']}}/>
+                            <CartImage source={{uri: menu['image']}}/>
                             {/*<CounterContainer>*/}
                             {/*    <Counter count={count} getData={getData}/>*/}
                             {/*</CounterContainer>*/}
@@ -82,7 +108,18 @@ const Cart = () => {
                     )
                 })
             }
+            <PriceContainer style={{ justifyContent:"center"}}>
+            <Text style={{fontSize:20, fontWeight:'bold'}}>합계 금액 :
+                {totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</Text>
+            </PriceContainer>
+            <OrderButton>
+                {/*주문 페이지로 이동*/}
+                {/*주문 이후엔 장바구니 비우기*/}
+                <Text style={{fontSize:30, fontWeight:'bold', color:'#fff'}}>
+                    주문하기
+                </Text>
+            </OrderButton>
         </Container>
     );
 };
-    export default Cart;
+export default Cart;

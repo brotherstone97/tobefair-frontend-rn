@@ -1,4 +1,4 @@
-import {Container} from '../components/MenuListStyle';
+import {Container} from '../styles/MenuListStyle';
 import React, {useContext, useEffect, useState} from "react";
 
 import useLoading from "../splashScreen/useLoading";
