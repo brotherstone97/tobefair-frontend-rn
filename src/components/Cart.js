@@ -1,15 +1,21 @@
-import React, {useContext, useEffect, useState} from "react";
-import {Text} from "react-native";
+import React, { useContext, useEffect, useState } from "react";
+import { Text } from "react-native";
 import styled from "styled-components/native";
 import Counter from "./Counter";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import {globals} from "react-native/packages/eslint-config-react-native-community";
+import { globals } from "react-native/packages/eslint-config-react-native-community";
 import OrderDetail from "./OrderDetail";
 
 const Container = styled.ScrollView`
   background-color: #f0f0f0;
   padding-top: 5%;
   flex: 1;
+`;
+const ResetCartButton = styled.TouchableOpacity`
+  background-color: #008577;
+`;
+const ResetText = styled.Text`
+  color: white;
 `;
 const CartContainer = styled.TouchableOpacity`
   background-color: white;
@@ -33,6 +39,9 @@ const CartPrice = styled.Text`
   color: black;
   font-size: 23px;
   font-weight: bold;
+`;
+const NullCart = styled.Text`
+  color: black;
 `;
 const CartImage = styled.Image`
   flex: 1;
@@ -66,60 +75,84 @@ const OrderButton = styled.TouchableOpacity`
 `;
 
 const Cart = () => {
-    const [count, setCount] = useState(1);
-    const [cartList, setCartList] = useState([]);
-    let totalPrice = 0;
+  const [count, setCount] = useState(1);
+  const [cartList, setCartList] = useState([]);
+  let totalPrice = 0;
 
-    // const [totalPrice, setTotalPrice] = useState(0);
-    const getData = (count) => {
-        setCount(count);
-    };
+  // const [totalPrice, setTotalPrice] = useState(0);
+  const getData = (count) => {
+    setCount(count);
+  };
 
-    const getCartList = async () => {
-        try {
-            const itemsFromStorage = JSON.parse(await AsyncStorage.getItem('cartList'));
-            setCartList(itemsFromStorage)
-        } catch (e) {
-            console.error(e)
-            alert('Failed to fetch the data from storage')
-        }//아예 안 나오는 듯
-        console.log('Done.')
+  const getCartList = async () => {
+    try {
+      const itemsFromStorage = JSON.parse(await AsyncStorage.getItem('cartList'));
+      setCartList(itemsFromStorage)
+    } catch (e) {
+      console.error(e)
+      alert('Failed to fetch the data from storage')
+    }//아예 안 나오는 듯
+    console.log('Done.')
+  };
+
+  const deleteCartList = async () => {
+    try {
+      await AsyncStorage.removeItem('cartList')
+      console.log("비우기 성공")
+    } catch (e) {
+      console.error(e)
+      alert('Failed to fetch the data from storage')
     }
-    useEffect(() => {
-        getCartList();
-    }, [])
 
-    return (
-        <Container>
-            {
-                cartList.map(menu => {
-                    totalPrice += menu.price
-                    return (
-                        <CartContainer key={menu.id}>
-                            <TextContainer>
-                                <CartMenu>{`${menu.name} ${menu.count}개`}</CartMenu>
-                                <CartPrice>{menu.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</CartPrice>
-                            </TextContainer>
-                            <CartImage source={{uri: menu['image']}}/>
-                            {/*<CounterContainer>*/}
-                            {/*    <Counter count={count} getData={getData}/>*/}
-                            {/*</CounterContainer>*/}
-                        </CartContainer>
-                    )
-                })
-            }
-            <PriceContainer style={{ justifyContent:"center"}}>
-            <Text style={{fontSize:20, fontWeight:'bold'}}>합계 금액 :
-                {totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</Text>
-            </PriceContainer>
-            <OrderButton>
-                {/*주문 페이지로 이동*/}
-                {/*주문 이후엔 장바구니 비우기*/}
-                <Text style={{fontSize:30, fontWeight:'bold', color:'#fff'}}>
-                    주문하기
-                </Text>
-            </OrderButton>
-        </Container>
-    );
+    console.log('Done.')
+  }
+  useEffect(() => {
+    getCartList();
+  }, [])
+
+  let list = null;
+  if (!cartList) {
+    list = <NullCart>장바구니에 담긴 물건이 없습니다.</NullCart>;
+  } else {
+    list = cartList.map(menu => {
+      totalPrice += menu.price
+      return (
+        <CartContainer key={menu.id}>
+          <TextContainer>
+            <CartMenu>{`${menu.name} ${menu.count}개`}</CartMenu>
+            <CartPrice>{menu.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</CartPrice>
+          </TextContainer>
+          <CartImage source={{ uri: menu['image'] }} />
+          {/*<CounterContainer>*/}
+          {/*    <Counter count={count} getData={getData}/>*/}
+          {/*</CounterContainer>*/}
+        </CartContainer>
+      )
+    });
+  }
+
+  return (
+    <Container>
+      <ResetCartButton onPress={() => {
+        deleteCartList()
+      }} >
+        <ResetText>
+          장바구니 비우기
+        </ResetText>
+      </ResetCartButton>
+      {list}
+      <PriceContainer style={{ justifyContent: "center" }}>
+        <Text style={{ fontSize: 20, fontWeight: 'bold' }}>합계 금액 :
+          {totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</Text>
+      </PriceContainer>
+      <OrderButton>
+        {/*주문 페이지로 이동*/}
+        {/*주문 이후엔 장바구니 비우기*/}
+        <Text style={{ fontSize: 30, fontWeight: 'bold', color: '#fff' }}>
+          주문하기
+        </Text>
+      </OrderButton>
+    </Container>
+  );
 };
 export default Cart;
