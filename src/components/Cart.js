@@ -3,7 +3,6 @@ import { Text } from "react-native";
 import styled from "styled-components/native";
 import Counter from "./Counter";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { globals } from "react-native/packages/eslint-config-react-native-community";
 import OrderDetail from "./OrderDetail";
 
 const Container = styled.View`
