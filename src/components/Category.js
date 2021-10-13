@@ -7,6 +7,7 @@ import {AntDesign} from '@expo/vector-icons'
 
 const TopContainer = styled.View`
   flex: 1;
+  padding-top:5%;
 `;
 const HomeButton = styled.TouchableOpacity`
   flex: 6;
