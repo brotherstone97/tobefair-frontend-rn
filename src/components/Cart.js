@@ -21,9 +21,9 @@ const ResetCartButton = styled.TouchableOpacity`
 `;
 const ResetText = styled.Text`
   color: white;
-  font-size: 20;
+  font-size: 20px;
   font-weight: bold;
-  padding: 2%;
+  padding: 5%;
 `;
 const ListContainer = styled.ScrollView`
   flex: 9;
@@ -74,7 +74,7 @@ const CounterContainer = styled.View`
 `;
 const OrderButtonContainer = styled.View`
   flex: 1;
-  background-color: #f0f0f0
+  background-color: #f0f0f0;
 `;
 const OrderButton = styled.TouchableOpacity`
   background-color: #008577;
@@ -84,10 +84,10 @@ const OrderButton = styled.TouchableOpacity`
   justify-content: center;
 `;
 const OrderButtonText = styled.Text`
-font-size: 25;
- font-weight: bold; 
- color: white;
- padding: 3%;
+  font-size: 25px;
+  font-weight: bold;
+  color: white;
+  padding: 3%;
 `;
 
 const Cart = () => {
@@ -102,69 +102,82 @@ const Cart = () => {
 
   const getCartList = async () => {
     try {
-      const itemsFromStorage = JSON.parse(await AsyncStorage.getItem('cartList'));
-      setCartList(itemsFromStorage)
+      const itemsFromStorage = JSON.parse(
+        await AsyncStorage.getItem("cartList")
+      );
+      setCartList(itemsFromStorage);
     } catch (e) {
-      console.error(e)
-      alert('Failed to fetch the data from storage')
-    }//아예 안 나오는 듯
-    console.log('Done.')
+      console.error(e);
+      alert("Failed to fetch the data from storage");
+    } //아예 안 나오는 듯
+    console.log("Done.");
   };
 
   const deleteCartList = async () => {
     try {
-      await AsyncStorage.removeItem('cartList')
-      console.log("비우기 성공")
+      await AsyncStorage.removeItem("cartList");
+      console.log("비우기 성공");
     } catch (e) {
-      console.error(e)
-      alert('Failed to fetch the data from storage')
+      console.error(e);
+      alert("Failed to fetch the data from storage");
     }
 
-    console.log('Done.')
-  }
+    console.log("Done.");
+  };
   useEffect(() => {
     getCartList();
-  }, [])
+  }, []);
 
   let list = null;
   if (!cartList) {
-    list = <NullContainer><NullCart>장바구니에 물건이 없습니다.</NullCart></NullContainer>;
+    list = (
+      <NullContainer>
+        <NullCart>장바구니에 물건이 없습니다.</NullCart>
+      </NullContainer>
+    );
   } else {
-    list = cartList.map(menu => {
-      totalPrice += menu.price
-      return (
-        <ListContainer>
-          <CartContainer key={menu.id}>
-            <TextContainer>
-              <CartMenu>{`${menu.name} ${menu.count}개`}</CartMenu>
-              <CartPrice>{menu.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</CartPrice>
-            </TextContainer>
-            <CartImage source={{ uri: menu['image'] }} />
-            {/*<CounterContainer>*/}
-            {/*    <Counter count={count} getData={getData}/>*/}
-            {/*</CounterContainer>*/}
-          </CartContainer>
-        </ListContainer>
-      )
-    });
+    list = (
+      <ListContainer>
+        {cartList.map((menu) => {
+          totalPrice += menu.price;
+          return (
+            <CartContainer key={menu.id}>
+              <TextContainer>
+                <CartMenu>{`${menu.name} ${menu.count}개`}</CartMenu>
+                <CartPrice>
+                  {menu.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                  원
+                </CartPrice>
+              </TextContainer>
+              <CartImage source={{ uri: menu["image"] }} />
+              {/*<CounterContainer>*/}
+              {/*    <Counter count={count} getData={getData}/>*/}
+              {/*</CounterContainer>*/}
+            </CartContainer>
+          );
+        })}
+      </ListContainer>
+    );
   }
 
   return (
     <Container>
-      <ResetCartButton onPress={() => {
-        deleteCartList()
-      }} >
-        <ResetText>
-          장바구니 비우기
-        </ResetText>
+      <ResetCartButton
+        onPress={() => {
+          deleteCartList();
+        }}
+      >
+        <ResetText>장바구니 비우기</ResetText>
       </ResetCartButton>
+
       {list}
       <OrderButtonContainer>
         <OrderButton>
           {/*주문 페이지로 이동*/}
           {/*주문 이후엔 장바구니 비우기*/}
           <OrderButtonText>
-            주문하기{'\t\t'}( {totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원 )
+            주문하기 ({" "}
+            {totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원 )
           </OrderButtonText>
         </OrderButton>
       </OrderButtonContainer>
