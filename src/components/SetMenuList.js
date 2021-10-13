@@ -1,9 +1,9 @@
 import React, {useContext} from "react";
-import {Container, TopContainer, Search, BottomContainer, MenuContainer, MenuImage, MenuName, MenuPrice} from '../styles/MenuListStyle';
+import {Container, TopContainer, Search, BottomContainer, MenuContainer, MenuImage, MenuName, MenuPrice, setCartInHeader} from '../styles/MenuListStyle';
 import APIContext from "../contexts";
 
 const SetMenuList = ({navigation}) => {
-    //consumer(useContext). provider로 context에 제공된 데이터를 가져오는 용도
+    setCartInHeader({navigation});
     const data = useContext(APIContext);
     return (
         <Container>

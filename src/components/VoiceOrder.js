@@ -99,13 +99,13 @@ const VoiceOrder = ({navigation}) => {
     return (
         <Container>
             <TopContainer>
-                <HomeButton
-                    onPress={() => {
-                        navigation.popToTop();
-                    }}
-                >
-                    <HomeText>처음으로 돌아가기</HomeText>
-                </HomeButton>
+                {/*<HomeButton*/}
+                {/*    onPress={() => {*/}
+                {/*        navigation.popToTop();*/}
+                {/*    }}*/}
+                {/*>*/}
+                {/*    <HomeText>처음으로 돌아가기</HomeText>*/}
+                {/*</HomeButton>*/}
             </TopContainer>
             <BottomContainer>
                 {console.log(results)}

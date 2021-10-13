@@ -1,7 +1,8 @@
-import React from "react";
+import React, {useLayoutEffect} from "react";
 import styled from 'styled-components/native';
 import CartButton from "../styles/CartButton";
-import {ScrollView, StyleSheet, SafeAreaView, StatusBar, Platform} from "react-native";
+import {ScrollView, StyleSheet, SafeAreaView, StatusBar, View, Text, TouchableOpacity} from "react-native";
+import {AntDesign} from '@expo/vector-icons'
 
 
 const TopContainer = styled.View`
@@ -56,22 +57,35 @@ const CategoryText = styled.Text`
 `;
 
 
-
 // const URL = "http://54.180.38.125:8000/menus/";
 const Category = ({navigation}) => {
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            headerRight: () => (
+                <TouchableOpacity style={{flexDirection: 'row'}}
+                                  onPress={() => {
+                                      navigation.navigate('Cart')
+                                  }}>
+                    <AntDesign
+                        style={{marginRight: 5}}
+                        name='shoppingcart'
+                        size={25}
+
+                        color='#fff'
+                    />
+                    <Text style={{marginRight: 12, color: '#fff', fontSize: 17}}>장바구니</Text>
+
+                </TouchableOpacity>
+            ),
+        });
+    }, []);
+
     return (
         <ScrollView contentContainerStyle={styles.scrollView}>
-            <TopContainer>
-                <HomeButton onPress={() => {
-                    navigation.navigate("Home")
-                }}>
-                    <HomeText>
-                        처음으로 돌아가기
-                    </HomeText>
-                </HomeButton>
-                <Search
-                    placeholder='검색어를 입력하세요.'/>
-            </TopContainer>
+            {/*<TopContainer>*/}
+            {/*    /!*<Search*!/*/}
+            {/*    /!*    placeholder='검색어를 입력하세요.'/>*!/*/}
+            {/*</TopContainer>*/}
             <BottomContainer>
                 <CategoryButton onPress={() => {
                     navigation.navigate('RecommendedList')
@@ -98,11 +112,6 @@ const Category = ({navigation}) => {
                     원하는 메뉴를 선택하세요.
                 </GuideText>
             </BottomContainer>
-            <CartButton
-                onPress={() => {
-                    navigation.navigate("Cart");
-                }}
-            />
         </ScrollView>
     );
 }

@@ -1,9 +1,20 @@
 import React from "react";
-import {Container, TopContainer, Search, BottomContainer, MenuContainer, MenuImage, MenuName, MenuPrice} from '../styles/MenuListStyle';
+import {
+    Container,
+    TopContainer,
+    Search,
+    BottomContainer,
+    MenuContainer,
+    MenuImage,
+    MenuName,
+    MenuPrice,
+    setCartInHeader
+} from '../styles/MenuListStyle';
 
 
 // const URL = "http://54.180.38.125:8000/menus/";
 const RecommendedList = ({navigation}) => {
+    setCartInHeader({navigation});
     // const {data, error, inProgress} = getData(URL);
     return (
         <Container>

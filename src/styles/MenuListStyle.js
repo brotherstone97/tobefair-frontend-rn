@@ -1,4 +1,7 @@
 import styled from "styled-components/native";
+import React, {useLayoutEffect} from "react";
+import {Text, TouchableOpacity} from "react-native";
+import {AntDesign} from "@expo/vector-icons";
 
 const Container = styled.ScrollView`
   background-color: #f0f0f0;
@@ -46,4 +49,27 @@ const MenuPrice = styled.Text`
   font-weight: normal;
 `;
 
-export {Container, TopContainer, Search, BottomContainer, MenuContainer, MenuImage, MenuName, MenuPrice};
+const setCartInHeader = ({navigation}) => {
+useLayoutEffect(() => {
+    navigation.setOptions({
+        headerRight: () => (
+            <TouchableOpacity style={{flexDirection: 'row'}}
+                              onPress={() => {
+                                  navigation.navigate('Cart')
+                              }}>
+                <AntDesign
+                    style={{marginRight: 5}}
+                    name='shoppingcart'
+                    size={25}
+
+                    color='#fff'
+                />
+                <Text style={{marginRight: 12, color: '#fff', fontSize: 17}}>장바구니</Text>
+
+            </TouchableOpacity>
+        ),
+    });
+}, []);
+}
+
+export {Container, TopContainer, Search, BottomContainer, MenuContainer, MenuImage, MenuName, MenuPrice, setCartInHeader};

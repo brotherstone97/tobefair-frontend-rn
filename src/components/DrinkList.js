@@ -1,9 +1,20 @@
 import React, {useContext} from "react";
-import {Container, TopContainer, Search, BottomContainer, MenuContainer, MenuImage, MenuName, MenuPrice} from '../styles/MenuListStyle';
+import {
+    Container,
+    TopContainer,
+    Search,
+    BottomContainer,
+    MenuContainer,
+    MenuImage,
+    MenuName,
+    MenuPrice,
+    setCartInHeader
+} from '../styles/MenuListStyle';
 import APIContext from "../contexts";
 
 
 const DrinkList = ({navigation}) => {
+    setCartInHeader({navigation});
     const data = useContext(APIContext);
     return (
         <Container>
