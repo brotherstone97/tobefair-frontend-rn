@@ -58,7 +58,7 @@ const NullContainer = styled.View`
 const NullCart = styled.Text`
   color: gray;
   font-weight: bold;
-  font-size: 25;
+  font-size: 25px;
 `;
 const CartImage = styled.Image`
   flex: 1;
