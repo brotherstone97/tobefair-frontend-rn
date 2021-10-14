@@ -4,6 +4,7 @@ import styled from "styled-components/native";
 import Counter from "./Counter";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import OrderDetail from "./OrderDetail";
+import { NavigationContainer } from "@react-navigation/native";
 
 const Container = styled.View`
   background-color: #f0f0f0;
@@ -89,7 +90,7 @@ const OrderButtonText = styled.Text`
   padding: 3%;
 `;
 
-const Cart = () => {
+const Cart = ({navigation}) => {
   const [count, setCount] = useState(1);
   const [cartList, setCartList] = useState([]);
   let totalPrice = 0;
@@ -164,6 +165,9 @@ const Cart = () => {
       <ResetCartButton
         onPress={() => {
           deleteCartList();
+          navigation.pop();
+          navigation.navigate("Cart");
+          alert("장바구니를 비웠습니다.")
         }}
       >
         <ResetText>장바구니 비우기</ResetText>
