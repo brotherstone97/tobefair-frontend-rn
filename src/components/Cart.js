@@ -165,7 +165,7 @@ const Cart = ({navigation}) => {
       <ResetCartButton
         onPress={() => {
           deleteCartList();
-          navigation.pop();
+          navigation.pop(1);
           navigation.navigate("Cart");
           alert("장바구니를 비웠습니다.")
         }}
