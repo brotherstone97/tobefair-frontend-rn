@@ -25,12 +25,14 @@ const HomeText = styled.Text`
 `;
 const BottomContainer = styled.ScrollView`
   flex: 5;
+  margin-bottom: 3%;
 `;
 const OrderText = styled.Text`
   font-weight: bold;
   font-size: 20px;
   padding-bottom: 2%;
   margin-left: 5%;
+  margin-bottom: 2%;
 `;
 const OrderContainer = styled.TouchableOpacity`
   background-color: white;
@@ -63,19 +65,17 @@ const OrderList = ({navigation}) => {
     return (
         <Container>
             {/*<TopContainer>*/}
-                {/*<HomeButton*/}
-                {/*    onPress={() => {*/}
-                {/*        navigation.navigate("Home")*/}
-                {/*    }}*/}
-                {/*>*/}
-                {/*    <HomeText>처음으로 돌아가기</HomeText>*/}
-                {/*</HomeButton>*/}
-                <OrderText>주문내역</OrderText>
+            {/*<HomeButton*/}
+            {/*    onPress={() => {*/}
+            {/*        navigation.navigate("Home")*/}
+            {/*    }}*/}
+            {/*>*/}
+            {/*    <HomeText>처음으로 돌아가기</HomeText>*/}
+            {/*</HomeButton>*/}
+            <OrderText>주문내역</OrderText>
             {/*</TopContainer>*/}
             <BottomContainer>
                 {data?.orders.map(order => {
-                    let prevFilteredOrderMenu = 0;
-                    let overlapCount = 0;
                     //각 order테이블의 id에 맞는 Payment,Branch,OrderMenu 필터링
                     let filteredPayment = data?.payments.filter(filteredPayment => {
                         if (order['payment'] !== filteredPayment['id']) return false;
@@ -89,6 +89,7 @@ const OrderList = ({navigation}) => {
                         if (order['id'] !== orderMenu['order']) return false;
                         return true;
                     });
+                    const menuCount = filteredOrderMenus.length;
                     //order_menu테이블의 menu속성과 menu테이블의 id속성이 일치하는 menu테이블의 값들만 필터링하고 그 결과물을 렌더해줌. (선언)
                     let printOrderMenu = filteredOrderMenus.map(filteredOrderMenu => {
                         let filteredMenus = data?.menus.filter(menu => {
@@ -98,25 +99,67 @@ const OrderList = ({navigation}) => {
                         return (
                             <View key={filteredOrderMenu['id']}>
                                 {
-                                    filteredMenus.map(filteredMenu => {
-                                        if (prevFilteredOrderMenu === filteredOrderMenu['order']) {
-                                            overlapCount++;
-                                        }
-                                        prevFilteredOrderMenu = filteredOrderMenu['order'];
-                                        return (
-                                            <>
-                                                {/* overlapCount < 1 일때 렌더*/}
-                                                {overlapCount === 0 && (
-                                                    <OrderMenu key={filteredMenu['id']}>
-                                                        {`${filteredMenu['name']} ${filteredOrderMenu['count']}개 ${filteredMenu['price'].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원`}</OrderMenu>)}
-                                                {/* overlapCount > 1 일때 즉,주문한 메뉴가 여러개일 때 렌더*/}
-                                                {overlapCount !== 0 && (<OrderMenu
-                                                    style={{textAlign: 'center', fontSize: 25}}>⋮</OrderMenu>)}
-                                            </>
-                                        );
-                                    })
+                                    for (i=0; i++; i<1){
+                                    return (
+                                    <>
+                                {/* overlapCount < 1 일때 렌더*/}
+                                {menuCount === 1 && (
+                                    <>
+                                    <OrderMenu
+                                    key={filteredMenu['id']}>
+                                {`${filteredMenu['name']} ${filteredOrderMenu['count']}개 ${filteredMenu['price'].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원`}</OrderMenu>
+                                    <OrderMenu
+                                    style={{textAlign: 'right', fontSize: 15,color:'#008577'}}>자세히</OrderMenu>
+                                    </>
+                                    )}
+
+                                {/* overlapCount > 1 일때 즉,주문한 메뉴가 여러개일 때 렌더*/}
+                                {menuCount > 1 && (
+                                    <>
+                                    <OrderMenu
+                                    key={filteredMenu['id']}>
+                                {`${filteredMenu['name']} ${filteredOrderMenu['count']}개 ${filteredMenu['price'].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원`}</OrderMenu>
+                                    <OrderMenu
+                                    style={{textAlign: 'right', fontSize: 15,color:'gray'}}>외 {menuCount-1}건</OrderMenu>
+                                    <OrderMenu
+                                    style={{textAlign: 'right', fontSize: 15,color:'#008577'}}>자세히</OrderMenu>
+                                    </>
+                                    )}
+                                    </>
+                                    );
                                 }
-                            </View>);
+                                    // filteredMenus.map(filteredMenu => {
+                                    // return (
+                                    //     <>
+                                    //         {/* overlapCount < 1 일때 렌더*/}
+                                    //         {menuCount === 1 && (
+                                    //             <>
+                                    //             <OrderMenu
+                                    //                 key={filteredMenu['id']}>
+                                    //                 {`${filteredMenu['name']} ${filteredOrderMenu['count']}개 ${filteredMenu['price'].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원`}</OrderMenu>
+                                    //             <OrderMenu
+                                    //             style={{textAlign: 'right', fontSize: 15,color:'#008577'}}>자세히</OrderMenu>
+                                    //             </>
+                                    //             )}
+                                    //
+                                    //         {/* overlapCount > 1 일때 즉,주문한 메뉴가 여러개일 때 렌더*/}
+                                    //         {menuCount > 1 && (
+                                    //             <>
+                                    //             <OrderMenu
+                                    //                 key={filteredMenu['id']}>
+                                    //                 {`${filteredMenu['name']} ${filteredOrderMenu['count']}개 ${filteredMenu['price'].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원`}</OrderMenu>
+                                    //             <OrderMenu
+                                    //             style={{textAlign: 'right', fontSize: 15,color:'gray'}}>외 {menuCount-1}건</OrderMenu>
+                                    //             <OrderMenu
+                                    //             style={{textAlign: 'right', fontSize: 15,color:'#008577'}}>자세히</OrderMenu>
+                                    //             </>
+                                    //             )}
+                                    //     </>
+                                    // );
+                                    // })
+                                }
+                            </View>
+                        );
                     })
                     //주문시간 처리
                     const orderDateObj = new Date(order["order_date"]);
