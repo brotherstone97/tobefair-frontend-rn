@@ -10,10 +10,13 @@ const Container = styled.View`
   align-items: center;
   justify-content: center;
 `;
-const HomeLogo = styled.Image`
+const LogoContainer = styled.View`
   flex: 1;
   margin-top: 10%;
   margin-bottom: 25%;
+`;
+const HomeLogo = styled.Image`
+  flex: 1;
   resize-mode: contain;
 `;
 const ButtonContainer = styled.View`
@@ -45,8 +48,9 @@ const ButtonText = styled.Text`
 const Home = ({ navigation }) => {
   return (
     <Container>
-      <HomeLogo source={Logo}>
-      </HomeLogo>
+      <LogoContainer>
+        <HomeLogo source={Logo} />
+      </LogoContainer>
       <ButtonContainer>
         <OrderButtonContainer>
           <OrderButton
