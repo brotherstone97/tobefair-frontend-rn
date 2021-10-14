@@ -90,77 +90,16 @@ const OrderList = ({navigation}) => {
                         return true;
                     });
                     const menuCount = filteredOrderMenus.length;
-                    //order_menu테이블의 menu속성과 menu테이블의 id속성이 일치하는 menu테이블의 값들만 필터링하고 그 결과물을 렌더해줌. (선언)
-                    let printOrderMenu = filteredOrderMenus.map(filteredOrderMenu => {
-                        let filteredMenus = data?.menus.filter(menu => {
+
+                    console.log('filteredOrderMenus": ', filteredOrderMenus)
+
+
+                    let filteredMenus = filteredOrderMenus.map(filteredOrderMenu => {
+                        return data?.menus.filter(menu => {
                             if (menu['id'] !== filteredOrderMenu['menu']) return false;
                             return true;
                         });
-                        return (
-                            <View key={filteredOrderMenu['id']}>
-                                {
-                                    for (i=0; i++; i<1){
-                                    return (
-                                    <>
-                                {/* overlapCount < 1 일때 렌더*/}
-                                {menuCount === 1 && (
-                                    <>
-                                    <OrderMenu
-                                    key={filteredMenu['id']}>
-                                {`${filteredMenu['name']} ${filteredOrderMenu['count']}개 ${filteredMenu['price'].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원`}</OrderMenu>
-                                    <OrderMenu
-                                    style={{textAlign: 'right', fontSize: 15,color:'#008577'}}>자세히</OrderMenu>
-                                    </>
-                                    )}
-
-                                {/* overlapCount > 1 일때 즉,주문한 메뉴가 여러개일 때 렌더*/}
-                                {menuCount > 1 && (
-                                    <>
-                                    <OrderMenu
-                                    key={filteredMenu['id']}>
-                                {`${filteredMenu['name']} ${filteredOrderMenu['count']}개 ${filteredMenu['price'].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원`}</OrderMenu>
-                                    <OrderMenu
-                                    style={{textAlign: 'right', fontSize: 15,color:'gray'}}>외 {menuCount-1}건</OrderMenu>
-                                    <OrderMenu
-                                    style={{textAlign: 'right', fontSize: 15,color:'#008577'}}>자세히</OrderMenu>
-                                    </>
-                                    )}
-                                    </>
-                                    );
-                                }
-                                    // filteredMenus.map(filteredMenu => {
-                                    // return (
-                                    //     <>
-                                    //         {/* overlapCount < 1 일때 렌더*/}
-                                    //         {menuCount === 1 && (
-                                    //             <>
-                                    //             <OrderMenu
-                                    //                 key={filteredMenu['id']}>
-                                    //                 {`${filteredMenu['name']} ${filteredOrderMenu['count']}개 ${filteredMenu['price'].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원`}</OrderMenu>
-                                    //             <OrderMenu
-                                    //             style={{textAlign: 'right', fontSize: 15,color:'#008577'}}>자세히</OrderMenu>
-                                    //             </>
-                                    //             )}
-                                    //
-                                    //         {/* overlapCount > 1 일때 즉,주문한 메뉴가 여러개일 때 렌더*/}
-                                    //         {menuCount > 1 && (
-                                    //             <>
-                                    //             <OrderMenu
-                                    //                 key={filteredMenu['id']}>
-                                    //                 {`${filteredMenu['name']} ${filteredOrderMenu['count']}개 ${filteredMenu['price'].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원`}</OrderMenu>
-                                    //             <OrderMenu
-                                    //             style={{textAlign: 'right', fontSize: 15,color:'gray'}}>외 {menuCount-1}건</OrderMenu>
-                                    //             <OrderMenu
-                                    //             style={{textAlign: 'right', fontSize: 15,color:'#008577'}}>자세히</OrderMenu>
-                                    //             </>
-                                    //             )}
-                                    //     </>
-                                    // );
-                                    // })
-                                }
-                            </View>
-                        );
-                    })
+                    })[0][0];
                     //주문시간 처리
                     const orderDateObj = new Date(order["order_date"]);
                     const orderDate = `${orderDateObj.getFullYear()}년 ${orderDateObj.getMonth() + 1}월 ${orderDateObj.getDate()}일 ${orderDateObj.getHours()}시 ${orderDateObj.getMinutes()}분`
@@ -170,7 +109,6 @@ const OrderList = ({navigation}) => {
                                             //주문내역 상세 네비게이션
                                             navigation.navigate("OrderDetail", {
                                                 'orderDate': orderDate,
-                                                // 'orderMenus': filteredMenus, //orderDetail에서 map함수로 하나하나 추출하자
                                                 'orderNo': order['id'],
                                                 'orderBranch': filteredBranch[0],
                                                 'amount': filteredPayment[0]['total_amount'],
@@ -183,7 +121,28 @@ const OrderList = ({navigation}) => {
                             </OrderId>
                             <OrderDate>주문시간: {orderDate} {"\n"}</OrderDate>
                             {/*주문한 메뉴 출력(호출)*/}
-                            {printOrderMenu}
+                            {menuCount === 1 && (
+                                <>
+                                    <OrderMenu
+                                        key={filteredOrderMenus[0]['id']}>
+                                        {`${filteredMenus['name']} ${filteredOrderMenus[0]['count']}개 ${filteredMenus['price'].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원`}</OrderMenu>
+                                    <OrderMenu
+                                        style={{textAlign: 'right', fontSize: 15, color: '#008577'}}>자세히</OrderMenu>
+                                </>
+                            )}
+
+                            {menuCount > 1 && (
+                                <>
+                                    <View style={{flexDirection: 'row'}}>
+                                        <OrderMenu
+                                            key={filteredOrderMenus[0]['id']}>
+                                            {`${filteredMenus['name']} ${filteredOrderMenus[0]['count']}개 ${filteredMenus['price'].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원`}</OrderMenu>
+                                        <OrderMenu>{'\t'}외 {menuCount - 1}건</OrderMenu>
+                                    </View>
+                                    <OrderMenu
+                                        style={{textAlign: 'right', fontSize: 15, color: '#008577',}}>자세히</OrderMenu>
+                                </>
+                            )}
                         </OrderContainer>
                     );
                 })}
