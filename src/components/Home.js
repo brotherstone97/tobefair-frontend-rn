@@ -1,20 +1,23 @@
 import React from "react";
 import styled from "styled-components/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import Logo from '../../assets/tobefairLogo.jpg'
 
 
 const Container = styled.View`
   flex: 1;
+  background-color: white;
   align-items: center;
   justify-content: center;
 `;
-const HomeLogo = styled.View`
-  margin-bottom: 30%;
+const HomeLogo = styled.Image`
+  flex: 1;
+  margin-top: 10%;
+  margin-bottom: 25%;
+  resize-mode: contain;
 `;
-const HomeText = styled.Text`
-  text-align: center;
-  font-size: 50px;
-  font-weight: bold;
+const ButtonContainer = styled.View`
+  flex:3;
 `;
 const OrderButtonContainer = styled.View`
   margin-top: -20%;
@@ -42,34 +45,35 @@ const ButtonText = styled.Text`
 const Home = ({ navigation }) => {
   return (
     <Container>
-      <HomeLogo>
-        <HomeText>이거{"\n"}주세요</HomeText>
+      <HomeLogo source={Logo}>
       </HomeLogo>
-      <OrderButtonContainer>
-        <OrderButton
-          onPress={() => {
-            navigation.navigate("Category");
-          }}
-        >
-          <ButtonText>
-            {`일반
+      <ButtonContainer>
+        <OrderButtonContainer>
+          <OrderButton
+            onPress={() => {
+              navigation.navigate("Category");
+            }}
+          >
+            <ButtonText>
+              {`일반
 주문`}
-          </ButtonText>
-        </OrderButton>
-        <OrderButton onPress={() => {
+            </ButtonText>
+          </OrderButton>
+          <OrderButton onPress={() => {
             navigation.navigate("VoiceOrder");
           }}>
-          <ButtonText>
-            {`음성
+            <ButtonText>
+              {`음성
 주문`}
-          </ButtonText>
-        </OrderButton>
-      </OrderButtonContainer>
-      <ListButton onPress={() => {
-            navigation.navigate("OrderList");
-          }}>
-        <ButtonText>주문내역</ButtonText>
-      </ListButton>
+            </ButtonText>
+          </OrderButton>
+        </OrderButtonContainer>
+        <ListButton onPress={() => {
+          navigation.navigate("OrderList");
+        }}>
+          <ButtonText>주문내역</ButtonText>
+        </ListButton>
+      </ButtonContainer>
     </Container>
   );
 };
