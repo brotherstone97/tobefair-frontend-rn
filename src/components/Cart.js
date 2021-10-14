@@ -90,7 +90,7 @@ const OrderButtonText = styled.Text`
   padding: 3%;
 `;
 
-const Cart = ({navigation}) => {
+const Cart = ({ navigation }) => {
   const [count, setCount] = useState(1);
   const [cartList, setCartList] = useState([]);
   let totalPrice = 0;
@@ -117,6 +117,9 @@ const Cart = ({navigation}) => {
     try {
       await AsyncStorage.removeItem("cartList");
       console.log("비우기 성공");
+      navigation.pop(1);
+      navigation.navigate("Cart");
+      alert("장바구니를 비웠습니다.")
     } catch (e) {
       console.error(e);
       alert("Failed to fetch the data from storage");
@@ -165,9 +168,6 @@ const Cart = ({navigation}) => {
       <ResetCartButton
         onPress={() => {
           deleteCartList();
-          navigation.pop(1);
-          navigation.navigate("Cart");
-          alert("장바구니를 비웠습니다.")
         }}
       >
         <ResetText>장바구니 비우기</ResetText>
