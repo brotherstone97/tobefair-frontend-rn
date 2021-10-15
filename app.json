@@ -32,7 +32,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.hyungseokoh.to_be_fair_frontend"
     },
     "web": {
       "favicon": "./assets/favicon.png"
