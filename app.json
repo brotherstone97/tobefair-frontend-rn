@@ -15,7 +15,7 @@
       ]
     ],
     "splash": {
-      "image": "./assets/tempSplash.jpg",
+      "image": "./assets/tobefairSplash.jpg",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },

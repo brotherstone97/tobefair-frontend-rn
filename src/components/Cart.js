@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Text } from "react-native";
 import styled from "styled-components/native";
 import Counter from "./Counter";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import OrderDetail from "./OrderDetail";
+import { NavigationContainer } from "@react-navigation/native";
 
 const Container = styled.View`
   background-color: #f0f0f0;
@@ -58,7 +58,7 @@ const NullContainer = styled.View`
 const NullCart = styled.Text`
   color: gray;
   font-weight: bold;
-  font-size: 25;
+  font-size: 25px;
 `;
 const CartImage = styled.Image`
   flex: 1;
@@ -89,7 +89,7 @@ const OrderButtonText = styled.Text`
   padding: 3%;
 `;
 
-const Cart = () => {
+const Cart = ({ navigation }) => {
   const [count, setCount] = useState(1);
   const [cartList, setCartList] = useState([]);
   let totalPrice = 0;
@@ -115,6 +115,9 @@ const Cart = () => {
     try {
       await AsyncStorage.removeItem("cartList");
       console.log("비우기 성공");
+      navigation.pop(1);
+      navigation.navigate("Cart");
+      alert("장바구니를 비웠습니다.")
     } catch (e) {
       console.error(e);
     }
