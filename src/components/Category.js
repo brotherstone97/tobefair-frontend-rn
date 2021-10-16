@@ -1,6 +1,5 @@
 import React, {useLayoutEffect} from "react";
 import styled from 'styled-components/native';
-import CartButton from "../styles/CartButton";
 import {ScrollView, StyleSheet, SafeAreaView, StatusBar, View, Text, TouchableOpacity} from "react-native";
 import {AntDesign} from '@expo/vector-icons'
 

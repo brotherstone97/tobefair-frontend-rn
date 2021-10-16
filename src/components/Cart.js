@@ -107,7 +107,6 @@ const Cart = () => {
       setCartList(itemsFromStorage);
     } catch (e) {
       console.error(e);
-      alert("Failed to fetch the data from storage");
     } //아예 안 나오는 듯
     console.log("Done.");
   };
@@ -118,7 +117,6 @@ const Cart = () => {
       console.log("비우기 성공");
     } catch (e) {
       console.error(e);
-      alert("Failed to fetch the data from storage");
     }
 
     console.log("Done.");

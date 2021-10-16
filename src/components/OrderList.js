@@ -5,7 +5,7 @@ import {View} from "react-native";
 
 const Container = styled.View`
   background-color: #f0f0f0;
-  padding-top: 10%;
+  padding-top: 2%;
   flex: 1;
 `;
 const TopContainer = styled.View`
@@ -72,7 +72,6 @@ const OrderList = ({navigation}) => {
             {/*>*/}
             {/*    <HomeText>처음으로 돌아가기</HomeText>*/}
             {/*</HomeButton>*/}
-            <OrderText>주문내역</OrderText>
             {/*</TopContainer>*/}
             <BottomContainer>
                 {data?.orders.map(order => {

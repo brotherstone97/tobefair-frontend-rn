@@ -1,4 +1,5 @@
 import React, {useContext, useEffect, useState} from "react";
+import {StatusBar} from "react-native";
 import styled from 'styled-components/native';
 import {NavigationContainer} from "@react-navigation/native";
 import StackNavigation from "./navigations/Stack";
@@ -16,6 +17,7 @@ const App = () => {
 
     return (
             <APIProvider>
+                <StatusBar backgroundColor="#00574b"/>
                 <NavigationContainer>
                     <StackNavigation/>
                 </NavigationContainer>

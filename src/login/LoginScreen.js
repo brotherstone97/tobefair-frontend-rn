@@ -1,5 +1,5 @@
 import React, {useRef, useState} from "react";
-import {StyleSheet, Text, ScrollView, View} from 'react-native';
+import {StyleSheet, Text, ScrollView, View, Alert} from 'react-native';
 import {TextInput} from "react-native-paper"
 import styled from "styled-components/native/dist/styled-components.native.esm";
 
@@ -41,7 +41,7 @@ const LoginScreen = ({navigation}) => {
         if ((await fetchPost(phone, password)) === true) {
             navigation.navigate("Home");
         } else {
-            alert('휴대폰번호 혹은 비밀번호가 일치하지 않습니다.')
+            Alert.alert("알림",'휴대폰번호 혹은 비밀번호가 일치하지 않습니다.', [{text:"확인"}])
         }
     }
 

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import styled from "styled-components/native";
-import {Text, StatusBar} from "react-native";
+import {Text, StatusBar, Alert} from "react-native";
 import Hr from "react-native-hr-component";
 import Counter from "./Counter";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -105,6 +105,7 @@ const MenuDetail = ({route}) => {
             />
             <Counter count={count} getData={getData}/>
             <AddCartButton onPress={() => {
+                Alert.alert("알림",`${route.params.name} ${count}개가\n장바구니에 추가 되었습니다.`,[{text:"확인"}])
                 addCart({
                     'name': route.params.name,
                     'count': count,

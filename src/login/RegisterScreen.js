@@ -44,9 +44,9 @@ const RegisterScreen = ({navigation}) => {
     };
 
     const _onSubmit = () => {
-        if(!phone || !password || !password || !age || !sex) alert("모든 정보를 입력하세요.");
+        if(!phone || !password || !password || !age || !sex) Alert.alert("알림","모든 정보를 입력하세요.",[{text:"확인"}]);
         else if (password !== checkPassword) {
-            alert('입력된 비밀번호가 일치하지 않습니다.')
+            Alert.alert("알림","입력된 비밀번호가 일치하지 않습니다.",[{text:"확인"}])
             console.log('phone:', phone)
             console.log('password:', password)
             console.log('checkPassword:', checkPassword)
@@ -58,7 +58,7 @@ const RegisterScreen = ({navigation}) => {
                 // console.log('checkPassword:', password)
                 navigation.navigate("LoginScreen");
             }else{
-                alert('회원가입에 실패하였습니다.')
+                Alert.alert("알림","회원가입에 실패하였습니다.",[{text:"확인"}])
             }
         }
     }
