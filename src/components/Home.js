@@ -10,7 +10,7 @@ const Container = styled.View`
   align-items: center;
   justify-content: center;
 `;
-const LogoContainer = styled.View`
+const LogoContainer = styled.TouchableOpacity`
   flex: 1;
   margin-top: 10%;
   margin-bottom: 25%;
@@ -48,7 +48,9 @@ const ButtonText = styled.Text`
 const Home = ({ navigation }) => {
   return (
     <Container>
-      <LogoContainer>
+      <LogoContainer onPress={() => {
+        navigation.navigate("About");
+      }}>
         <HomeLogo source={Logo} />
       </LogoContainer>
       <ButtonContainer>

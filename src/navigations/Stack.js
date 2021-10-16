@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import {createStackNavigator} from "@react-navigation/stack";
+import React, { useState } from "react";
+import { createStackNavigator } from "@react-navigation/stack";
 
 //로그인
 import LoginScreen from "../login/LoginScreen";
@@ -23,10 +23,12 @@ import OrderList from "../components/OrderList";
 import OrderDetail from "../components/OrderDetail";
 import Splash from "../splashScreen/Splash";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import {fetchPost} from "../login/postSignIn";
+import { fetchPost } from "../login/postSignIn";
 //장바구니
 import Cart from "../components/Cart";
-import {Button} from "react-native";
+import { Button } from "react-native";
+//앱 정보
+import About from "../components/About";
 
 const Stack = createStackNavigator();
 
@@ -51,22 +53,22 @@ const StackNavigation = () => {
             <Stack.Screen
                 name="Splash"
                 component={Splash}
-                options={{headerShown: false}}
+                options={{ headerShown: false }}
             />
             <Stack.Screen
                 name="RegisterScreen"
                 component={RegisterScreen}
-                options={{headerShown: false}}
+                options={{ headerShown: false }}
             />
             <Stack.Screen
                 name="LoginScreen"
                 component={LoginScreen}
-                options={{headerShown: false}}
+                options={{ headerShown: false }}
             />
             <Stack.Screen
                 name="Home"
                 component={Home}
-                options={{headerShown: false}}
+                options={{ headerShown: false }}
             />
             <Stack.Screen
                 name="Category"
@@ -145,6 +147,14 @@ const StackNavigation = () => {
                 component={Cart}
                 options={{
                     headerTitle: "장바구니",
+                    headerShown: true,
+                }}
+            />
+            <Stack.Screen
+                name="About"
+                component={About}
+                options={{
+                    headerTitle: "앱 정보",
                     headerShown: true,
                 }}
             />

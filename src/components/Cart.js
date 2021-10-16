@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Text } from "react-native";
 import styled from "styled-components/native";
 import Counter from "./Counter";
 import AsyncStorage from "@react-native-async-storage/async-storage";
