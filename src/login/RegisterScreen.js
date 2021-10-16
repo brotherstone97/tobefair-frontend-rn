@@ -1,5 +1,5 @@
 import React, {useRef, useState} from "react";
-import {Text, StyleSheet, ScrollView} from "react-native";
+import {Text, StyleSheet, ScrollView, Alert} from "react-native";
 import {TextInput} from "react-native-paper"
 import DropDownPicker from "react-native-dropdown-picker";
 import styled from "styled-components/native";
@@ -46,7 +46,7 @@ const RegisterScreen = ({navigation}) => {
     const _onSubmit = () => {
         if(!phone || !password || !password || !age || !sex) Alert.alert("알림","모든 정보를 입력하세요.",[{text:"확인"}]);
         else if (password !== checkPassword) {
-            Alert.alert("알림","입력된 비밀번호가 일치하지 않습니다.",[{text:"확인"}])
+            Alert.alert("알림","비밀번호 4자리와 비밀번호 확인이 일치하지 않습니다.",[{text:"확인"}])
             console.log('phone:', phone)
             console.log('password:', password)
             console.log('checkPassword:', checkPassword)

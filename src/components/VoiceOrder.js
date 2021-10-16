@@ -46,9 +46,9 @@ const VoiceButton = styled.TouchableOpacity`
   justify-content: center;
 `;
 const VoiceButtonText = styled.Text`
-  color: white;
+  color: white; 
   text-align: center;
-  font-size: 50px;
+  font-size: 40px;
   font-weight: bold;
 `;
 
