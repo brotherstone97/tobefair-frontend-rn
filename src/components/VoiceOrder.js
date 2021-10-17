@@ -22,7 +22,6 @@ import Voice, {
 
 import APIContext from "../contexts";
 import {Search, MenuContainer, MenuImage, MenuName, MenuPrice} from '../styles/MenuListStyle';
-import {Touchable} from "react-native-web";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
@@ -106,14 +105,6 @@ const VoiceOrder = ({navigation}) => {
 
     const [isOrderMenu, setIsOrderMenu] = useState(false); //토글 상태변수
 
-    // const [addedItems, setAddedItems] = useState([]);
-    // const readItemFromStorage = async () => {
-    //     //AsyncStorage는 string만 취급하기 때문에 객체가 오고갈 땐 변환해준다
-    //     const item = JSON.parse(await AsyncStorage.getItem('cartList'));
-    //     setAddedItems(item);
-    //     console.log("prev cart: ", addedItems);
-    // };
-
     const _handleToggleChange = value => {
         console.log("Toggle value: ", value)
         setIsOrderMenu(value);
@@ -127,8 +118,8 @@ const VoiceOrder = ({navigation}) => {
         function onSpeechError(e: SpeechErrorEvent) {
             console.error(e);
         }
+        _handleSentenceChange(null);
 
-        _handleSentenceChange("감자튀김 하나랑 마운틴듀 하나")
 
         Voice.onSpeechError = onSpeechError;
         Voice.onSpeechResults = onSpeechResults;
@@ -144,6 +135,7 @@ const VoiceOrder = ({navigation}) => {
                 await Voice.stop();
                 setIsListening(false);
             } else {
+                _handleSentenceChange(recordResults[0]);
                 setRecordResults([]);
                 await Voice.start("ko-KR");
                 setIsListening(true);
@@ -170,24 +162,6 @@ const VoiceOrder = ({navigation}) => {
             }
             console.log("카트 저장 성공", nextMenus);
             await AsyncStorage.setItem('cartList', JSON.stringify(nextMenus));
-            // let cart;
-            // let menus = []
-            // value.map((menu, i) => {
-            //     //name,count,price,image
-            //     menus[i] = {
-            //         "name": menu.name,
-            //         "count": menu.count,
-            //         "price": menu.price,
-            //         "image": menu.image,
-            //     }
-            // })
-            // if (!addedItems) {
-            //     cart = menus;
-            // } else {
-            //     cart = [...addedItems, ...menus]
-            // }
-            // setAddedItems(cart)
-            // await AsyncStorage.setItem('cartList', JSON.stringify(cart))
         } catch (e) {
             console.error("error!!!:", e)
         }
