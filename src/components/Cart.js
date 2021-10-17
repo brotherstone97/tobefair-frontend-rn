@@ -4,6 +4,7 @@ import Counter from "./Counter";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import OrderDetail from "./OrderDetail";
 import { NavigationContainer } from "@react-navigation/native";
+import {Alert} from "react-native";
 
 const Container = styled.View`
   background-color: #f0f0f0;
@@ -117,7 +118,7 @@ const Cart = ({ navigation }) => {
       console.log("비우기 성공");
       navigation.pop(1);
       navigation.navigate("Cart");
-      alert("장바구니를 비웠습니다.")
+      Alert.alert("알림","장바구니를 비웠습니다.",[{text:"확인"}])
     } catch (e) {
       console.error(e);
     }

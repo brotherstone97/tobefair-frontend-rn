@@ -59,8 +59,6 @@ const MenuDetail = ({route}) => {
         setCount(count);
     }
 
-    //다른 페이지에서 장바구니 추가하면 기존 장바구니가 삭제되는 문제 해결해야함
-    //복수의 장바구니 항목을 반복문을 통해 모두 표시하는 방법 연구
     const addCart = async value => {
         try {
             let cart;
@@ -73,7 +71,7 @@ const MenuDetail = ({route}) => {
             console.log('cart:', cart)
             setAddedItems(cart)
             await AsyncStorage.setItem('cartList', JSON.stringify(cart))
-            console.log("카드 저장 성공")
+            console.log("카트 저장 성공")
             console.log(await AsyncStorage.getItem('cartList'))
         } catch (e) {
             console.log(e)
